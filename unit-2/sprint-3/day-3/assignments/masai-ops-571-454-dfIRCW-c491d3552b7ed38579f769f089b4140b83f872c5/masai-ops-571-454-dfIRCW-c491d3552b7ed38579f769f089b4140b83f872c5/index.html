@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up Page</title>
+    <style>
+      /* Write all necessery css here  */
+    </style>
+  </head>
+
+  <body>
+    <button id="store-name">Store name to LS</button>
+    <button id="get-name">Get name from LS</button>
+    <h1 id="show-name">
+      <!-- Here Show the Name  -->
+    </h1>
+
+    <button id="store-mob">Store Mobile Num to LS</button>
+    <button id="get-mob">Get Mobile Number from LS</button>
+    <h1 id="show-mob">
+      <!-- Here show the mobile No  -->
+    </h1>
+
+    <button id="store-hobbies">Store Hobbies to LS</button>
+    <button id="get-hobbies">Get Hobbies from LS</button>
+    <h1 id="show-hobbies">
+      <!-- Here show the hobbies  -->
+    </h1>
+
+    <button id="store-students">Store Students to LS</button>
+    <button id="get-students">Get Students from LS</button>
+    <h1 id="show-students">
+      <!-- Here show students  -->
+    </h1>
+  </body>
+  <script>
+    // Write all necessery JS here
+    let name = document.getElementById("show-name");
+    let mob = document.getElementById("show-mob");
+    let hobbies = document.getElementById("show-hobbies");
+    let students = document.getElementById("show-students");
+
+    document
+      .getElementById("store-name")
+      .addEventListener("click", function () {
+        localStorage.setItem("username", "Masai School");
+      });
+
+    document.getElementById("get-name").addEventListener("click", function () {
+      name.innerText = localStorage.getItem("username");
+      console.log(localStorage.getItem("username"));
+    });
+
+    document.getElementById("store-mob").addEventListener("click", function () {
+      localStorage.setItem("mobile", 999999999);
+    });
+
+    document.getElementById("get-mob").addEventListener("click", function () {
+      mob.innerText = localStorage.getItem("mobile");
+    });
+
+    document
+      .getElementById("store-hobbies")
+      .addEventListener("click", function () {
+        let hobbies = ["cricket", "music"];
+        localStorage.setItem("my_hobbies", JSON.stringify(hobbies));
+      });
+
+    document
+      .getElementById("get-hobbies")
+      .addEventListener("click", function () {
+        let arrhobby = JSON.parse(localStorage.getItem("my_hobbies"));
+        hobbies.innerText = arrhobby.join("/");
+      });
+
+    document
+      .getElementById("store-students")
+      .addEventListener("click", function () {
+        let students = [
+          { name: "Nrupul", place: "Banglore" },
+          { name: "Prateek", place: "Mumbai" },
+        ];
+        localStorage.setItem("students", JSON.stringify(students));
+      });
+
+    document
+      .getElementById("get-students")
+      .addEventListener("click", function () {
+        let data = JSON.parse(localStorage.getItem("students"));
+        let arrname = [];
+        data.forEach(function (ele) {
+          arrname.push(ele.name);
+        });
+        students.innerText = arrname.join("/");
+      });
+  </script>
+</html>

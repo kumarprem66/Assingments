@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+
+      .menubar {
+        height: 50px;
+        display: flex;
+        padding-left: 50px;
+        padding-right: 100px;
+        justify-content: space-between;
+        background-color: darkgray;
+        box-shadow: 0px 1px 1px 1px darkgray;
+        /* border: 1px solid black; */
+      }
+      .menubar .left {
+        width: 100px;
+        height: 100%;
+      }
+      .menubar .left img {
+        width: 100px;
+        height: 100%;
+      }
+      .menubar .right {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+      }
+      .menubar .right .right_child {
+        padding: 10px 20px 10px 20px;
+        /* border: 1px solid black; */
+        font-weight: 800;
+      }
+
+      .main {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+        padding-left: 50px;
+        padding-right: 100px;
+      }
+      .left_content {
+        width: 50%;
+        padding-right: 30px;
+        /* border: 1px solid red; */
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+      }
+      .left_content_bottom {
+        display: grid;
+        grid-template-columns: 30% 60%;
+        column-gap: 15px;
+      }
+      .right_content {
+        /* border: 1px solid red; */
+        width: 50%;
+        display: grid;
+        column-gap: 15px;
+        row-gap: 20px;
+        grid-template-columns: 50% 50%;
+      }
+      .card {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="menubar">
+        <div class="left">
+          <img src="./flex26126.png" alt="Brand name" />
+        </div>
+        <div class="right">
+          <div class="right_child"><a href="">Home</a></div>
+          <div class="right_child"><a href="">About</a></div>
+          <div class="right_child">
+            <a href="">Course</a>
+          </div>
+          <div class="right_child"><a href="">Instructor</a></div>
+          <div class="right_child"><a href="">Blog</a></div>
+          <div class="right_child"><a href="">Contact</a></div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="left_content">
+          <h5>WELCOME TO STUDYLAB</h5>
+          <h1>WE ARE STUDYLAB AN ONLINE LEARNING CENTER</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia cumque
+            tempora at, quaerat esse adipisci tenetur impedit perferendis
+            placeat tempore sunt necessitatibus labore consectetur voluptatum id
+            pariatur eligendi iure iste, harum nam quod perspiciatis deleniti
+            debitis. Aperiam fugit corrupti voluptatum iste? Hic sit soluta ipsa
+            excepturi consectetur molestias error accusamus.
+          </p>
+          <div class="left_content_bottom">
+            <img src="./flex26125.png" alt="" />
+            <h3>Learn Anything From StudyLab watch video</h3>
+          </div>
+        </div>
+        <div class="right_content">
+          <div class="card">
+            <img src="./flex26121.png" alt="" />
+            <h2>Top Quality Content</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam hic
+              qui fugiat, itaque placeat consectetur?
+            </p>
+          </div>
+          <div class="card">
+            <img src="./flex26122.png" alt="" />
+            <h2>Highly Skilled Instructor</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam hic
+              qui fugiat, itaque placeat consectetur?
+            </p>
+          </div>
+          <div class="card">
+            <img src="./flex2613.png" alt="" />
+            <h2>World Class & Quiz</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam hic
+              qui fugiat, itaque placeat consectetur?
+            </p>
+          </div>
+          <div class="card">
+            <img src="./flex26124.png" alt="" />
+            <h2>Get Certified</h2>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam hic
+              qui fugiat, itaque placeat consectetur?
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

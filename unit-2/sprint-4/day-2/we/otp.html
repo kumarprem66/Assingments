@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" />
+    <button>Login</button>
+  </body>
+
+  <script>
+    let otp = 1234;
+    let buttonEl = document.querySelector("button");
+    let inputEl = document.querySelector("input");
+
+    buttonEl.addEventListener("click", function () {
+      let num = Number(inputEl.value);
+      let promise = new Promise((resolve, reject) => {
+        if (num === otp) {
+          resolve("OTP Matched");
+        } else {
+          resolve("OTP Didn't match");
+        }
+      });
+
+      promise
+        .then((el) => {
+          alert(el);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    });
+  </script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in Page</title>
+  </head>
+  <body>
+    <div class="nav">
+      <a href="./index.html">Signup</a>
+      <a href="./signin.html">Signin</a>
+    </div>
+    <div id="signin">
+      <h1 id="heading">Please Enter Your Details</h1>
+      <form>
+        <input type="email" id="email" />
+        <input type="password" id="password" />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+  <script>
+    let heading = document.getElementById("heading");
+    let formele = document.querySelector("form");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+
+    formele.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let data = JSON.parse(localStorage.getItem("account-data")) || [];
+      // let data = JSON.parse(localStorage.getItem("account-data"));
+
+      // data.forEach(function (ele, ind) {
+      //   if (ele.email == email.value && ele.password == password.value) {
+      //     heading.innerText = "Sign in Successful";
+      //   } else {
+      //     heading.innerText = "Wrong Credentials";
+      //   }
+
+      //   console.log(ele);
+      //   console.log(email.value);
+      //   console.log(password.value);
+      // });
+
+      let signupresult = "Wrong Credentials";
+      for (let i = 0; i < data.length; i++) {
+        if (
+          data[i].email == email.value &&
+          data[i].password == password.value
+        ) {
+          signupresult = "Sign in Successful";
+          break;
+        }
+
+        // console.log(data[i].email);
+        // console.log(data[i].password);
+        // console.log(email.value);
+        // console.log(password.value);
+      }
+      heading.innerText = signupresult;
+    });
+  </script>
+</html>

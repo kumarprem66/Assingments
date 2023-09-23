@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    #nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+    #main {
+      width: 95%;
+      height: 85vh;
+      display: grid;
+
+      grid-template-columns: 68% 30%;
+      margin: auto;
+      column-gap: 20px;
+    }
+    .hero_item_left {
+      position: relative;
+    }
+    .hero_item_left > video {
+      width: 100%;
+      height: 565px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .hero_item_right {
+      display: flex;
+      flex-direction: column;
+      /* border: 1px solid blue; */
+    }
+    .hero_item_right > div:nth-child(1) {
+      background-color: yellow;
+      font-weight: 900;
+      font-size: 20px;
+      padding-left: 50px;
+      height: 40%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .hero_item_right > div:nth-child(2) {
+      background-color: yellowgreen;
+      padding-left: 50px;
+      font-size: 18px;
+      height: 20%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    .hero_item_right > div:nth-child(2) > p > span {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .hero_item_right > div:nth-child(3) {
+      height: 39%;
+      display: flex;
+      justify-content: center;
+    }
+    .hero_item_right > div > img {
+      width: 56%;
+
+      margin: auto;
+    }
+    .position {
+      /* background-color: aqua; */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .position > div {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+    }
+    .position > div > div {
+      display: flex;
+      align-items: center;
+      margin-top: -35px;
+    }
+    .position > button {
+      bottom: 30px;
+      right: 30px;
+    }
+
+    /* ==================  middle section =============== */
+    .middle_section_one {
+      display: grid;
+      width: 95%;
+      position: relative;
+      grid-template-columns: 30% 70%;
+      height: 100vh;
+      margin: auto;
+      background-color: blue;
+      padding: 60px 40px;
+      border-radius: 10px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      align-items: center;
+    }
+    .videoc > div > video {
+      width: 100%;
+      height: 500px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .videoc > div {
+      padding-right: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .videoc > div > p {
+      font-size: 20px;
+      margin-bottom: -30px;
+    }
+    .videoc > div > h1 {
+      font-size: 70px;
+    }
+    .btn_des {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .videoc > button {
+      right: 100px;
+      bottom: 80px;
+    }
+
+    #middle_section > button {
+      bottom: 70px;
+      right: 100px;
+    }
+    #middle_section2 {
+      width: 95%;
+      margin: auto;
+      height: 90vh;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      /* overflow: hidden; */
+      position: relative;
+    }
+    #middle_section2 > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    #middle_section2 > div {
+      position: absolute;
+      bottom: 10px;
+      left: 50px;
+    }
+
+    #middle_section2 > div > p {
+      color: white;
+      font-size: 20px;
+      margin-bottom: -20px;
+    }
+    #middle_section2 > div > h1 {
+      color: white;
+    }
+
+    /* =============  middle_content3 ============= */
+    .middle_section3 {
+      width: 95%;
+      margin: auto;
+      position: relative;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .middle_section3 > div > img {
+      width: 100%;
+      height: 100%;
+      /* border: 1px solid red; */
+    }
+    #section3 > img {
+      height: 90%;
+    }
+
+    .middle_section3 > div > video {
+      width: 100%;
+      height: 90%;
+      object-fit: cover;
+    }
+    .middle_section3 > div {
+      position: relative;
+    }
+    .middle_section3 > div > div {
+      position: absolute;
+      bottom: 60px;
+      left: 30px;
+      color: white;
+    }
+
+    .middle_section3 > div > div > p {
+      margin-bottom: -15px;
+      font-size: large;
+    }
+
+    .middle_section3 > div > div > div {
+      position: absolute;
+      bottom: 60px;
+      left: 30px;
+      color: white;
+    }
+
+    #btnvid {
+      background-color: aqua;
+      position: absolute;
+      bottom: 40px;
+      right: 50px;
+    }
+
+    /* #section3r {
+      border: 1px solid red;
+      position: relative;
+    }
+    #section3r > div {
+      display: flex;
+      justify-content: space-between;
+      border: 5px solid purple;
+    }
+
+    #section3r > div > button {
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+    }
+
+    #section3r > div > div > p {
+      margin-bottom: -15px;
+      font-size: large;
+      border: 1px solid green;
+    }
+    #section3r > div > div > h1 {
+      border: 1px solid yellow;
+      display: block;
+    } */
+
+    /* #section3r > div > div > div {
+      position: absolute;
+      bottom: 60px;
+      left: 30px;
+      color: white;
+      border: 1px solid blue;
+    } */
+
+    #middle_section4 {
+      width: 95%;
+      margin: auto;
+      /* height: 90vh; */
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    #middle_section4 > div:nth-child(3) > img {
+      width: 100%;
+      height: 565px;
+      object-fit: contain;
+    }
+    #middle_section4 > div > img {
+      width: 100%;
+      height: 565px;
+      /* object-fit: contain; */
+    }
+    #middle_section4 > div > div > p {
+      margin-bottom: -15px;
+      font-size: large;
+    }
+
+    .imagesc {
+      background-color: rgb(39, 92, 39);
+    }
+    .imagesc > div {
+      color: white;
+    }
+    .imagesc > div > h1 {
+      font-size: 60px;
+    }
+    .videoc > div > img {
+      width: 100%;
+      height: 530px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .section5 > div {
+      height: 90vh;
+      /* border: 1px solid yellow; */
+    }
+
+    /* =========================  bottom =================== */
+    .bottom_head_line {
+      text-align: center;
+    }
+    .com_logo {
+      width: 150px;
+      text-align: center;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: auto;
+      margin-bottom: 40px;
+    }
+    .com_logo > img {
+      width: 100%;
+    }
+
+    .bottom2 {
+      background-color: rgb(34, 34, 111);
+      padding: 50px 30px;
+    }
+    .bottom2 > div:nth-child(1) {
+      display: flex;
+      justify-content: space-around;
+    }
+    .bottom2 > div:nth-child(2) {
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
+  <body>
+    <!--        nav section       -->
+    <div id="nav">
+      <h1>IKEA</h1>
+      <i class="material-icons">menu_open</i>
+    </div>
+    <!--        main section   -->
+
+    <div id="main">
+      <div class="hero_item_left">
+        <video
+          src="https://www.ikea.com/global/en/images/1973_orangev3_2b69a9b053.mp4"
+          loop=""
+          autoplay=""
+        ></video>
+        <div class="position">
+          <div>
+            <p>The 1973 IKEA Cataloque</p>
+            <div>
+              <span class="material-icons"> arrow_forward </span>
+              <h1>Flashback to 50 years ago</h1>
+            </div>
+          </div>
+
+          <button class="btn_des">
+            <span class="material-icons"> play_circle_filled </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero_item_right">
+        <div>
+          <h1>
+            Go Shopping
+            <span class="material-icons"> arrow_forward_ios</span>
+          </h1>
+        </div>
+
+        <div>
+          <p>
+            Online store: <span>ikea.in</span>
+            <span class="material-icons"> expand_more</span>
+          </p>
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/global/en/images/clock_1153a706e3.png?f=m"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <!--      middle-section      -->
+    <div class="middle_section_one videoc">
+      <div>
+        <p>IKEA Everyday Rituals</p>
+        <h1>Dare to take a cold trip</h1>
+      </div>
+      <div>
+        <video
+          src="https://www.ikea.com/global/en/images/swimstart_1a9c1adba8.mp4"
+          autoplay=""
+          loop=""
+        ></video>
+      </div>
+      <button class="btn_des">
+        <span class="material-icons"> play_circle_filled </span>
+      </button>
+    </div>
+
+    <div id="middle_section2">
+      <img
+        src="https://www.ikea.com/global/en/images/Livingrrom_16_8278620845.jpg?f=xxxl"
+        alt=""
+      />
+
+      <div>
+        <p>inspiring homes</p>
+        <h1>A visit to a Swedish farmhouse</h1>
+      </div>
+    </div>
+
+    <div class="middle_section3">
+      <div id="section3">
+        <img
+          src="	https://www.ikea.com/global/en/images/trashcollectionstartpage_154a5a9baf.jpeg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>IKEA Normay's conciious & clever campaign</p>
+          <h1>The trash collection</h1>
+        </div>
+      </div>
+
+      <div id="section3r">
+        <video
+          src="https://www.ikea.com/global/en/images/bathroom_slider_7a1e920bd7.mp4"
+          autoplay=""
+          loop=""
+        ></video>
+
+        <div>
+          <div>
+            <p>Design timeline</p>
+            <h1>Decades of IKEA bathrooms</h1>
+          </div>
+          <button class="btn_des" id="btnvid">
+            <span class="material-icons"> play_circle_filled </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="middle_section4">
+      <div>
+        <img
+          src="	https://www.ikea.com/global/en/images/PH_186334_87409ee9fa.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>OBEGRANSAD collection</p>
+          <h1>Swedish House Mafia collab</h1>
+        </div>
+      </div>
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/Linus_Malmo_Living_Room5_65683d4ad5.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>inspiring homes</p>
+          <h1>A student starting small in the city</h1>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/PE_121718_17b3510426.jpg?f=m"
+          alt=""
+        />
+      </div>
+
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/Share_the_victory_dance_photo_1x1_v2_394976e5ce.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>IKEA everyday rituals</p>
+          <h1>Dance like it's the weekend!</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="middle_section_one imagesc videoc">
+      <div>
+        <p>IKEA Museum</p>
+        <h1>The duo behind five decades of IKEA design</h1>
+      </div>
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/hagberg_PH_143183_0bee7f9e25.jpg?f=xl"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <div class="middle_section3 section5">
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/poster_festival_8739974424.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>ideas for loving life at home</p>
+          <h1>Explore the IKEA Festival</h1>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/Us_and_Our_Planet_01_4_5_84135b89bb.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>A book to inspire change</p>
+          <h1>Us & Our Planet</h1>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="	https://www.ikea.com/global/en/images/IKEA_MF_Eye_b355100fd0.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>IKEA Festival at Desing Week</p>
+          <h1>Highlights from Milano</h1>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/IKEA_Foundation_3_58eac66272.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>The IKEA Foundation</p>
+          <h1>Changing the story of our planet</h1>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="	https://www.ikea.com/global/en/images/KASEBERGA_PH_185243_096302767d.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>KASEBERGA collection</p>
+          <h1>Surf style comes home</h1>
+        </div>
+      </div>
+
+      <div>
+        <img
+          src="https://www.ikea.com/global/en/images/PE_808354p_9adda171da.jpg?f=xxxl"
+          alt=""
+        />
+        <div>
+          <p>Swedish traditions</p>
+          <h1>Celebrating the cinnamon bun</h1>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="bottom_head_line">A world of inspiration for your home</h1>
+    <div class="com_logo"><img src="./LALLU-FUR.png" alt="" /></div>
+
+    <div class="bottom">
+      <img
+        src="https://www.ikea.com/global/en/images/footer-illustration.svg"
+        alt=""
+      />
+    </div>
+    <div class="bottom2">
+      <div>
+        <h2>
+          <i>International Sales</i>
+          <i>About IKEA</i>
+          <i>IKEA Museum</i>
+          <i>Work With us</i>
+          <i>Ethics & Integrity</i>
+        </h2>
+      </div>
+      <div>
+        <h2><i>Cookie information </i> <i>Privacy statement</i></h2>
+        <h2>© Inter IKEA Systems B.V. 1999 - 2023</h2>
+        <h2>Co-worker login</h2>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+
+create database Practice;
+use Practice;
+create table menu (
+itemCode varchar(5),
+itemName varchar(20),
+category varchar(20),
+price decimal(5,2));
+
+alter table menu add column qunatity int;
+desc menu;
+alter table menu change itemName Name varchar(20);
+alter table menu add column validy int FIRST;
+alter table menu rename to Menu_Card;
+alter table Menu_Card modify column itemCode int;
+alter table Menu_Card rename to mc;
+desc mc;
+alter table mc drop column validity;
+alter table mc change quantity itemQuantity int;
+alter table mc change validy validity int;
+alter table mc modify Name varchar(20) unique not null;
+alter table mc alter itemQuantity set default 1;
+drop table mc;
+drop database Practice;
+
+
+
+
+
+
+create database Event_ManageMent;
+use Event_ManageMent;
+create table Event(
+EventId int primary key,
+Event varchar(50),
+DateEvent date,
+NumPerformers int
+);
+
+desc Event;
+alter table Event add column Address varchar(50);
+alter table Event change EventType EventName varchar(20);
+alter table Event modify DateEvent date not null;
+alter table Event drop primary key;
+alter table Event modify DateEvent date unique not null;
+alter table Event drop EventId;
+alter table Event add column id int after Address;
+alter table Event modify column DateEvent datetime not null;
+desc Event;
+drop table Event;
+drop database Event_ManageMent;
+
+
+
+
+
+
+
+
+
+
+

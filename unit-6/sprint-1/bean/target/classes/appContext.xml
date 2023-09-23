@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		
+		
+		<bean id="a3" class="constructorAuto.A"></bean>
+		<bean id="a5" class="constructorAuto.A"></bean>
+		<bean id="b4" class="constructorAuto.B"></bean>
+		
+		<bean id="d1" class="constructorAuto.Demo" autowire="constructor" init-method="mysetup" destroy-method="destroy"></bean>
+		
+		
+		<bean id="tourist" class="holidaytour.Tourist">
+			<constructor-arg name="name" value="prem"/>
+			<constructor-arg name="age" value="20"/>
+			<constructor-arg name="aadhar_id" value="36084934800708"/>
+		</bean>
+		
+		<bean id="holiday" class="holidaytour.HolidayPackage">
+			<property name="package_name" value="mypackage"/>
+			<property name="tourist" ref="tourist"/>
+			<property name="package_expiry" value="3434"/>
+			
+		</bean>
+		
+		<bean id="emp1" class="employeeproblem2.Employee">
+			<constructor-arg  value="1"/>
+			<constructor-arg value="prem"/>
+			<constructor-arg value="2746"/>
+			<constructor-arg value="makshjsfjs"/>
+		</bean>
+		
+		
+	 
+		<bean id="emp2" class="employeeproblem2.Employee">
+			<constructor-arg name="empid" value="2"/>
+			<constructor-arg name="name" value="premkr"/>
+			<constructor-arg name="salary" value="24424"/>
+			<constructor-arg name="address" value="makshjsfjs"/>
+		</bean>
+		
+		<bean id="emp3" class="employeeproblem2.Employee">
+			<constructor-arg name="empid" value="3"/>
+			<constructor-arg name="name" value="premkumar"/>
+			<constructor-arg name="salary" value="244244"/>
+			<constructor-arg name="address" value="makshjsfjs"/>
+		</bean>
+		
+		
+		
+		
+		
+		
+		
+		<bean id="dept1" class="employeeproblem2.Department">
+			<constructor-arg value="1"/>
+			<constructor-arg value="sales"/>
+			<constructor-arg value="jehanabad"/>
+		
+	</bean>
+	
+	
+		</bean>
+		
+			<bean id="dept2" class="employeeproblem2.Department">
+			<constructor-arg name="deptid" value="2"/>
+			<constructor-arg name="deptName" value="sales"/>
+			<constructor-arg name="location" value="jehanabad"/>
+		
+		</bean>
+		
+			<bean id="dept3" class="employeeproblem2.Department">
+			<constructor-arg name="deptid" value="3"/>
+			<constructor-arg name="deptName" value="sales"/>
+			<constructor-arg name="location" value="jehanabad"/>
+		
+		</bean> 
+		
+		
+		<bean id="demo" class="employeeproblem2.Demo" init-method="myinit" destroy-method="cleanUp" lazy-init="true" scope="prototype">
+			<property name="theMap">
+				<map>
+					<entry key-ref="dept1" value-ref="emp1"></entry>
+					<entry key-ref="dept2" value-ref="emp2"></entry>
+					<entry key-ref="dept3" value-ref="emp3"></entry>
+				</map>
+			</property>
+		</bean>
+		
+		
+</beans>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Movie App</title>
+    <style>
+      /* Write necessery styles here  */
+    </style>
+  </head>
+  <style>
+    #serach {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    /* .error-container {
+      display: none;
+    } */
+
+    #movie_container {
+      width: 90%;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 30px;
+      gap: 20px;
+      padding: 10px;
+    }
+    #movie_container > div {
+      text-align: center;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+    .poster {
+      width: 300px;
+      height: 300px;
+    }
+    .title {
+      font-weight: 500;
+    }
+  </style>
+  <body>
+    <div id="serach">
+      <input type="text" id="search-inp" placeholder="Search" />
+      <button id="search-btn">Search</button>
+    </div>
+    <div id="movie_container"></div>
+  </body>
+
+  <script>
+    // Write necessery JS here
+    let container = document.getElementById("movie_container");
+
+    let searchinp = document.getElementById("search-inp");
+
+    let searchbtn = document.getElementById("search-btn");
+
+    let error = document.createElement("h2");
+    error.setAttribute("class", "error-container");
+    // error.innerText = "Movie not Found";
+    document.querySelector("body").append(error);
+
+    let api = "https://fakestoreapi.com/products/category/jewelery";
+
+    let moviedata = [];
+    fetch(api)
+      .then((request) => {
+        return request.json();
+      })
+      .then((data) => {
+        moviedata = data;
+        displayitem(moviedata);
+        // console.log(moviedata);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    function displayitem(data) {
+      container.innerHTML = "";
+      data.forEach((element) => {
+        let card = document.createElement("div");
+        let name = document.createElement("h2");
+        name.setAttribute("class", "title");
+        name.innerText = element.title;
+
+        let poster = document.createElement("img");
+        poster.setAttribute("class", "poster");
+        poster.setAttribute("src", element.image);
+
+        card.append(poster, name);
+        container.append(card);
+      });
+    }
+
+    searchbtn.addEventListener("click", sortitem);
+
+    function sortitem() {
+      error.innerText = "";
+      let sorteddata = moviedata.filter((element) => {
+        if (
+          element.title.toLowerCase().includes(searchinp.value.toLowerCase())
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (sorteddata.length == 0) {
+        error.innerText = "Movie not Found";
+      }
+
+      displayitem(sorteddata);
+    }
+  </script>
+</html>

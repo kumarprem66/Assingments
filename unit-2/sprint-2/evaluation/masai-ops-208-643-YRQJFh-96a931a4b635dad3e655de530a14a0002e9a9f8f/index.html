@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dominos</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        /* padding: 10px; */
+        /* border: 1px solid red; */
+        padding: 10px;
+        align-items: center;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      }
+      .nav > h1 {
+        color: blue;
+      }
+      .nav > div {
+        display: flex;
+        justify-content: space-between;
+
+        /* border: 1px solid blue; */
+      }
+      .nav div > p {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 14px;
+        color: deepskyblue;
+      }
+      .nav > button {
+        color: white;
+        background-color: red;
+        padding: 10px;
+        border: none;
+        font-weight: 600;
+      }
+
+      /*  =======   top ========== */
+
+      .top > div {
+        padding-left: 50px;
+        padding-right: 50px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .top > h1 {
+        margin-left: 50px;
+      }
+
+      .order_card {
+        text-align: center;
+        padding: 10px;
+        padding-bottom: 20px;
+        background-color: red;
+      }
+
+      .order_card > img {
+        width: 50%;
+      }
+      .order_card > h3,
+      .order_card > p {
+        color: white;
+      }
+      .order_card > button {
+        padding: 5px 10px;
+        color: red;
+        border: none;
+      }
+
+      .mid {
+        margin-top: 40px;
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+
+      .mid > div {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .explore_card {
+        padding: 10px;
+        /* border: 1px solid red; */
+        text-align: center;
+        color: rgb(75, 73, 73);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      }
+      .explore_card > img {
+        width: 30%;
+      }
+      .explore_card > h3 {
+        font-weight: 900;
+      }
+
+      .explore_card > div > h2 {
+        color: red;
+      }
+
+      .bottom {
+        display: flex;
+        margin-top: 50px;
+        /* padding: 50px; */
+        padding-left: 50px;
+        padding-right: 50px;
+        background-color: grey;
+        margin-bottom: 20px;
+        /* align-items: flex-end; */
+      }
+
+      .bottom > div:nth-child(1) {
+        /* border: 1px solid red; */
+        width: 50%;
+      }
+
+      .bottom > div:nth-child(1) img {
+        width: 80%;
+        /* border: 1px solid red; */
+      }
+
+      .bottom > div:nth-child(2) {
+        padding: 10px;
+        /* border: 1px solid red; */
+        width: 50%;
+      }
+
+      .bottom > div:nth-child(2) {
+        padding: 10px;
+        /* border: 1px solid red; */
+        width: 50%;
+      }
+
+      .bottom > div:nth-child(2) > p {
+        font-weight: 700;
+      }
+
+      .bottom > div:nth-child(2) > img {
+        width: 150px;
+      }
+      /* Write all styles here  */
+      @media only screen and (max-width: 1000px) {
+        /* Medium Screen  */
+        .nav > div {
+          display: none;
+        }
+        .top > div {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .mid > div {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .bottom {
+          flex-direction: column;
+        }
+
+        .bottom > div:nth-child(1) {
+          width: 100%;
+        }
+
+        .bottom > div:nth-child(1) img {
+          width: 100%;
+        }
+
+        .bottom > div:nth-child(2) {
+          padding: 0px;
+
+          width: 100%;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        /* Small Screen  */
+        .nav > div {
+          display: none;
+        }
+        .top > div {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .mid > div {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .bottom {
+          flex-direction: column;
+        }
+
+        .bottom > div:nth-child(1) {
+          width: 100%;
+        }
+
+        .bottom > div:nth-child(1) img {
+          width: 100%;
+        }
+
+        .bottom > div:nth-child(2) {
+          padding: 0px;
+
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <!-- Create the Navbar here  -->
+      <!-- Use Flex to achieve the layout  -->
+      <h1>Domino's Pizza</h1>
+      <div>
+        <p>OUR MENU</p>
+        <p>DOMINOZ'S STORES</p>
+        <p>GIFT CARD</p>
+        <p>CORPORATE ENQUIRY</p>
+        <p>CONTACT</p>
+      </div>
+      <button>DOWNLOAD APP</button>
+    </div>
+    <div class="top">
+      <h1>Order</h1>
+      <div>
+        <!-- Here should have 6 divs -->
+        <!-- Use grid to achieve the layout -->
+        <div class="order_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-22/Screenshot%202022-12-22%20at%208.37.04%20AM_353938.png"
+            alt="pizza"
+          />
+          <h3>VEG PIZZA</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+            reprehenderit consequatur cupiditate eius voluptatum reiciendis.
+          </p>
+          <button>VIEW ALL</button>
+        </div>
+        <div class="order_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-22/Screenshot%202022-12-22%20at%208.37.04%20AM_353938.png"
+            alt="pizza"
+          />
+          <h3>VEG PIZZA</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+            reprehenderit consequatur cupiditate eius voluptatum reiciendis.
+          </p>
+          <button>VIEW ALL</button>
+        </div>
+        <div class="order_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-22/Screenshot%202022-12-22%20at%208.37.04%20AM_353938.png"
+            alt="pizza"
+          />
+          <h3>VEG PIZZA</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+            reprehenderit consequatur cupiditate eius voluptatum reiciendis.
+          </p>
+          <button>VIEW ALL</button>
+        </div>
+        <div class="order_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-22/Screenshot%202022-12-22%20at%208.37.04%20AM_353938.png"
+            alt="pizza"
+          />
+          <h3>VEG PIZZA</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+            reprehenderit consequatur cupiditate eius voluptatum reiciendis.
+          </p>
+          <button>VIEW ALL</button>
+        </div>
+        <div class="order_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-22/Screenshot%202022-12-22%20at%208.37.04%20AM_353938.png"
+            alt="pizza"
+          />
+          <h3>VEG PIZZA</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+            reprehenderit consequatur cupiditate eius voluptatum reiciendis.
+          </p>
+          <button>VIEW ALL</button>
+        </div>
+        <div class="order_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-22/Screenshot%202022-12-22%20at%208.37.04%20AM_353938.png"
+            alt="pizza"
+          />
+          <h3>VEG PIZZA</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
+            reprehenderit consequatur cupiditate eius voluptatum reiciendis.
+          </p>
+          <button>VIEW ALL</button>
+        </div>
+      </div>
+    </div>
+    <div class="mid">
+      <h1>Explore</h1>
+      <div>
+        <!-- Here should have 8 divs -->
+        <!-- Use grid to achieve the layout -->
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+
+        <div class="explore_card">
+          <img
+            src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%203.06.17%20PM_590391.png"
+            alt="error"
+          />
+          <h3>OUR MENU</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
+          <div>
+            <hr />
+            <h2>DISCOVER PIZZA</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <!-- Use Flex to achieve the layout  -->
+      <div>
+        <!-- Left hand side part  -->
+        <img src="https://www.dominos.co.in/assets/new_app_img@2x.png" alt="" />
+      </div>
+
+      <div>
+        <!-- Right hand side part  -->
+        <h1>Unlock Exclusive Offers</h1>
+        <p>For lighting fast ordering experince download the Dominos's app</p>
+        <img
+          src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%202.47.09%20PM_558991.png"
+          alt=""
+        />
+        <img
+          src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-21/Screenshot%202022-12-21%20at%202.47.43%20PM_652243.png"
+          alt=""
+        />
+      </div>
+    </div>
+  </body>
+</html>

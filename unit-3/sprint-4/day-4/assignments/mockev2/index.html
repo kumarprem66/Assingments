@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* All CSS For Home Page Goes Here  */
+
+      main {
+        display: grid;
+        grid-template-columns: 20% 70%;
+      }
+      #product-container > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .card {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <h1>Web E-Commerce</h1>
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+    </div>
+    <h1 id="alert"></h1>
+    <main>
+      <div id="filter">
+        <div id="brand-filter">
+          <h2>Filter By Brands</h2>
+          <div>
+            <input type="checkbox" id="roadster" />
+            <p>Roadster</p>
+          </div>
+          <div>
+            <input type="checkbox" id="blackberrys" />
+            <p>Blackberrys</p>
+          </div>
+          <div>
+            <input type="checkbox" id="van-heusen" />
+            <p>Van Heusen</p>
+          </div>
+          <div>
+            <input type="checkbox" id="allen-solly" />
+            <p>Allen Solly</p>
+          </div>
+          <div>
+            <input type="checkbox" id="twills" />
+            <p>Twills</p>
+          </div>
+        </div>
+        <div id="category-filter">
+          <h2>Filter By Categories</h2>
+          <div>
+            <input type="checkbox" id="men" />
+            <p>Men</p>
+          </div>
+          <div>
+            <input type="checkbox" id="women" />
+            <p>Women</p>
+          </div>
+          <div>
+            <input type="checkbox" id="homedecor" />
+            <p>Homedecor</p>
+          </div>
+          <div>
+            <input type="checkbox" id="kids" />
+            <p>Kids</p>
+          </div>
+        </div>
+
+      </div>
+      <div id="product-container">
+        <div>
+          <!-- Here Append All the Products  -->
+        </div>
+      </div>
+    </main>
+  </body>
+  <script type="module">
+    // All Your Script for Home Page Goes Here
+
+    let url =
+      "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products";
+
+    let card_con = document.querySelector("#product-container>div");
+
+    let product_con = document.getElementById("product-container");
+
+    let alerttext = document.getElementById("alert");
+
+    let roads = document.getElementById("roadster");
+    let black = document.getElementById("blackberrys");
+    let van = document.getElementById("van-heusen");
+    let allen = document.getElementById("allen-solly");
+    let twills = document.getElementById("twills");
+
+    let menc = document.getElementById("men");
+    let womanc = document.getElementById("women");
+    let home = document.getElementById("homedecor");
+    let kids = document.getElementById("kids");
+
+
+    let r;
+    let b;
+    let m;
+    let t;
+
+    let filterarr = {
+      roads : "roadster",
+      black : "blackberrys",
+      van : "van-heusen",
+      allen: "allen-solly",
+      twills: "twills",
+      menc: "men",
+      womanc:"women",
+      home: "homedecor",
+      kids: "kids"
+    };
+
+    let localcart = JSON.parse(localStorage.getItem("cart")) || [];
+    let totaldata = [];
+
+    async function getData() {
+      let res = await fetch(url);
+      res = await res.json();
+      totaldata = res.data;
+      // console.log(totaldata)
+      display(totaldata);
+    }
+
+    // getData();
+
+    window.addEventListener("load", function () {
+      getData();
+    });
+
+    function display(data) {
+      card_con.innerText = "";
+
+      data.forEach((element, ind) => {
+        let card = document.createElement("div");
+        card.classList.add("card");
+
+        let img = document.createElement("img");
+        img.src = element.image;
+
+        let title = document.createElement("h2");
+        title.innerText = element.title;
+
+        let brand = document.createElement("p");
+        brand.innerText = element.brand;
+        let category = document.createElement("p");
+        category.innerText = element.category;
+        let price = document.createElement("p");
+        price.innerText = element.price;
+        let addtocart = document.createElement("button");
+        addtocart.innerText = "Add To Cart";
+        addtocart.addEventListener("click",function(){
+
+          if(isAlready(element.id)){
+
+            alerttext.innerText = "Product already in the cart"
+          }else{
+            alerttext.innerText = "Product added to The cart";
+            localcart.push(element);
+            localStorage.setItem("cart",JSON.stringify(localcart));
+          }
+          
+
+
+        })
+
+        // addtocart.classList.add("addCart");
+        // addtocart.innerText = "Add To Cart";
+
+        card.append(img, title, brand, category, price, addtocart);
+
+        card_con.append(card);
+
+        // product_con.append(card_con)
+      });
+    }
+
+    roads.addEventListener("click", function () {
+      r = roads.checked;
+
+      if (r) {
+        let roadsdata = totaldata.filter((item) => {
+          return item.brand.toLowerCase() == "roadster";
+        });
+
+        display(roadsdata);
+        // console.log(roadsdata);
+      }else{
+        display(totaldata)
+      }
+    });
+
+    black.addEventListener("click", function () {
+      b = black.checked;
+
+      // if (b && r && m) {
+      //   let blacksdata = totaldata.filter((item) => {
+      //     if(item.brand.toLowerCase() == "blackberrys" ||
+      //     item.brand.toLowerCase() == "roadster" &&
+      //      item.category.toLowerCase() == "men")
+      //      return true;
+      //   });
+
+      //   display(blacksdata);
+      //   // console.log(roadsdata);
+      // }else if(b && r){
+      //   let blacksdata = totaldata.filter((item) => {
+      //     if(item.brand.toLowerCase() == "blackberrys" ||
+      //     item.brand.toLowerCase() == "roadster"
+      //      )
+      //      return true;
+      //   });
+
+      //   display(blacksdata);
+      // }else if(r && m){
+      //   let blacksdata = totaldata.filter((item) => {
+      //     if(
+      //     item.brand.toLowerCase() == "roadster" &&
+      //      item.category.toLowerCase() == "men")
+      //      return true;
+      //   });
+
+      //   display(blacksdata);
+      // }else if(b && m){
+      //   let blacksdata = totaldata.filter((item) => {
+      //     if(item.brand.toLowerCase() == "blackberrys" &&
+      //      item.category.toLowerCase() == "men")
+      //      return true;
+      //   });
+
+      //   display(blacksdata);
+      // }else 
+      if(b){
+        let blacksdata = totaldata.filter((item) => {
+          if(item.brand.toLowerCase() == "blackberrys"
+          )
+           return true;
+        });
+
+        display(blacksdata);
+      }else{
+        display(totaldata);
+      }
+    });
+
+    // van.addEventListener("click", function () {
+    //   let v = van.checked;
+
+    //   if (v) {
+    //     let vansdata = totaldata.filter((item) => {
+    //       return item.brand.toLowerCase() == "van-heusen";
+    //     });
+
+    //     display(vansdata);
+    //     // console.log(roadsdata);
+    //   }else{
+    //     display(totaldata)
+    //   }
+    // });
+
+    allen.addEventListener("click", function () {
+      let a = allen.checked;
+
+      if (a) {
+        let allensdata = totaldata.filter((item) => {
+          return item.brand.toLowerCase() == "allen-solly";
+        });
+
+        display(allensdata);
+        // console.log(roadsdata);
+      }else{
+        display(totaldata)
+      }
+    });
+
+    twills.addEventListener("click", function () {
+      t = twills.checked;
+
+      
+      if (m && t && r) {
+        
+
+        let mensdata = totaldata.filter((item) => {
+          if((item.brand.toLowerCase() == "roadster" && item.category.toLowerCase() == "men") 
+          || (item.brand.toLowerCase() == "twills" && item.category.toLowerCase() == "men"))
+          return true;
+        });
+
+        // let mensdata2 = mensdata.slice(1,3)
+        display(mensdata);
+        console.log(mensdata);
+      }else if (t && r) {
+        let twillssdata = totaldata.filter((item) => {
+          if(item.brand.toLowerCase() == "twills" ||
+          item.brand.toLowerCase() == "roadster")
+          return true;
+        });
+
+        display(twillssdata);
+        // console.log(roadsdata);
+      }else if(t){
+        let twillssdata = totaldata.filter((item) => {
+          return item.brand.toLowerCase() == "twills";
+        });
+
+        display(twillssdata);
+      }
+      else{
+        display(totaldata)
+      }
+    });
+
+    menc.addEventListener("click", function () {
+      m = menc.checked;
+
+      if (m && t && r) {
+        
+
+        let mensdata = totaldata.filter((item) => {
+          if((item.brand.toLowerCase() == "roadster" && item.category.toLowerCase() == "men") 
+          || (item.brand.toLowerCase() == "twills" && item.category.toLowerCase() == "men"))
+          return true;
+        });
+
+        // let mensdata2 = mensdata.slice(1,3)
+        display(mensdata);
+        console.log(mensdata);
+      }
+      else if(m){
+
+        let mensdata = totaldata.filter((item) => {
+          if(item.category.toLowerCase() == "men" &&
+           item.brand.toLowerCase() == "roadster")
+          return true;
+        });
+
+        // let mensdata2 = mensdata.slice(1,3)
+        display(mensdata);
+        // console.log(mensdata);
+
+      }
+      else{
+        display(totaldata)
+      }
+
+      // console.log(m,t,r)
+    });
+
+    // womanc.addEventListener("click", function () {
+    //   let w = womanc.checked;
+
+    //   if (w) {
+    //     let womendata = totaldata.filter((item) => {
+    //       return item.category.toLowerCase() == "women";
+    //     });
+
+    //     display(womendata);
+    //     // console.log(roadsdata);
+    //   }else{
+    //     display(totaldata)
+    //   }
+    // });
+
+
+
+    // home.addEventListener("click", function () {
+    //   let h = home.checked;
+
+    //   if (h) {
+    //     let homedata = totaldata.filter((item) => {
+    //       return item.category.toLowerCase() == "homedecor";
+    //     });
+
+    //     display(homedata);
+    //     // console.log(roadsdata);
+    //   }else{
+    //     display(totaldata)
+    //   }
+    // });
+
+    // kids.addEventListener("click", function () {
+    //   let k = kids.checked;
+
+    //   if (k) {
+    //     let kidsdata = totaldata.filter((item) => {
+    //       return item.category.toLowerCase() == "kids";
+    //     });
+
+    //     display(kidsdata);
+    //     // console.log(roadsdata);
+    //   }else{
+    //     display(totaldata)
+    //   }
+    // });
+
+
+
+    // function isAlready(id){
+    //   for(let i=0;i<localcart.length;i++){
+
+    //     if(localcart[i]==id){
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+
+
+
+    function isAlready(id){
+      for(let i=0;i<localcart.length;i++){
+
+        if(localcart[i].id==id){
+          return true;
+        }
+      }
+      return false;
+     
+    }
+  
+
+
+
+
+
+  </script>
+</html>

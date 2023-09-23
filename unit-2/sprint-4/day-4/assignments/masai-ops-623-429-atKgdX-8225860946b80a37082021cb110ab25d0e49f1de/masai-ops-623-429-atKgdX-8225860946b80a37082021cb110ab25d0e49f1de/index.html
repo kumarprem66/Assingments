@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* Write all necessery css here  */
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      #filter {
+        display: block;
+        margin: auto;
+        font-size: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      #product-container {
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20%;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      #product-container > div {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      #product-container > div > img {
+        height: 200px;
+        width: 100%;
+      }
+
+      #product-container > div > button {
+        display: block;
+        margin: auto;
+        background-color: rgb(81, 201, 245);
+        color: white;
+        padding: 5px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <h1>Masai E-Commerce</h1>
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+    </div>
+    <!-- Use this Select Tag for Filtering the Products  -->
+    <select id="filter">
+      <option value="">Filter By Category</option>
+      <option value="Laptop">Laptop</option>
+      <option value="Mobile">Mobile</option>
+      <option value="Speakers">Speakers</option>
+    </select>
+    <div id="product-container">
+      <!-- Here Append All the Products  -->
+    </div>
+  </body>
+  <script>
+    // Write all necessery JS here
+
+    async function fetchData() {
+      try {
+        let res = await fetch(
+          "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-tech-products"
+        );
+
+        res = await res.json();
+        console.log(res);
+        filterdata(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchData();
+
+    let filterby = document.getElementById("filter");
+    filterby.addEventListener("change", () => {
+      fetchData();
+    });
+
+    function filterdata(data) {
+      let filtervalue = filterby.value;
+      if (filtervalue === "") {
+        displayProduct(data);
+      } else {
+        data = data.filter((product) => {
+          return product.category == filtervalue;
+        });
+        displayProduct(data);
+      }
+    }
+
+    let container = document.getElementById("product-container");
+
+    let cartArr = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function displayProduct(data) {
+      container.innerHTML = "";
+      data.forEach((element) => {
+        let card = document.createElement("div");
+        let image = document.createElement("img");
+        let brand = document.createElement("h3");
+        let category = document.createElement("p");
+        let details = document.createElement("p");
+        let price = document.createElement("h4");
+        let add_to_cart = document.createElement("button");
+
+        add_to_cart.textContent = "Add to Cart";
+        image.src = element.img;
+        brand.textContent = element.brand;
+        category.textContent = element.category;
+        price.textContent = `₹${element.price}`;
+        details.textContent = element.details;
+
+        add_to_cart.addEventListener("click", () => {
+          if (checkDuplicate(element)) {
+            alert("Product Already in Cart");
+          } else {
+            cartArr.push({ ...element, quantity: 1 });
+            localStorage.setItem("cart", JSON.stringify(cartArr));
+            alert("Product Added To Cart");
+          }
+        });
+
+        card.append(image, brand, price, details, category, add_to_cart);
+        container.append(card);
+      });
+    }
+
+    function checkDuplicate(product) {
+      for (let i = 0; i < cartArr.length; i++) {
+        if (cartArr[i].id === product.id) {
+          return true;
+        }
+      }
+      return false;
+    }
+  </script>
+</html>

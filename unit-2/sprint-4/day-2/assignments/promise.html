@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <button>check</button>
+  </body>
+
+  <script>
+    let check = document.querySelector("button");
+    check.addEventListener("click", getdata);
+
+    // setTimeout(fun,4000);
+
+    function getdata() {
+      let data = document.querySelector("input").value;
+
+      let promise = new Promise((resolve, reject) => {
+        if (Number(data) % 2 == 0) {
+          setTimeout(() => {
+            resolve("even");
+          }, 4000);
+        } else if (Number(data) % 2 == 1) {
+          setTimeout(() => {
+            resolve("odd");
+          }, 2000);
+        } else {
+          reject("string");
+        }
+      });
+
+      promise
+        .then((el) => {
+          alert(el);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+
+    // let res = getdata(data);
+  </script>
+</html>

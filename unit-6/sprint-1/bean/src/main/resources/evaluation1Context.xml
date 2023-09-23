@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<bean id="serv" class="problem2.Service">
+		
+		<constructor-arg value="jdbc:mysql://localhost:3306/unit6sprint1"/>
+		<constructor-arg value="root"/>
+		<constructor-arg value="premk"/>
+	</bean>
+	
+	<bean id="mysql" name="problem2.MySql">
+		<property name="service" ref="serv"></property>
+	</bean>
+	
+	<bean id="mysql" name="problem2.Oracle">
+		<property name="service" ref="serv"></property>
+	</bean>
+	
+	<bean id="mysql" name="problem2.MSSQL">
+		<property name="service" ref="serv"></property>
+	</bean>
+
+
+	<bean id="member1" name="problem3.Member">
+			<constructor-arg value="1"/>
+			<constructor-arg value="prem"/>
+			<constructor-arg  value="20"/>
+			<constructor-arg  value="monthly"/>
+	</bean>
+	
+	<bean id="member2" name="problem3.Member">
+			<constructor-arg value="2"/>
+			<constructor-arg value="prem"/>
+			<constructor-arg  value="20"/>
+			<constructor-arg  value="monthly"/>
+	</bean>
+	
+	<bean id="member3" name="problem3.Member">
+			<constructor-arg value="3"/>
+			<constructor-arg value="prem"/>
+			<constructor-arg  value="20"/>
+			<constructor-arg  value="monthly"/>
+	</bean>
+	
+	
+
+	
+	<bean id="cardio" name="problem3.WorkoutProgram">
+			<constructor-arg  value="1"/>
+			<constructor-arg value="cardio"/>
+			<constructor-arg value="5"/>
+			
+	</bean>
+	
+	<bean id="strength" name="problem3.WorkoutProgram">
+			<constructor-arg  value="2"/>
+			<constructor-arg value="strength"/>
+			<constructor-arg value="5"/>
+			
+	</bean>
+	
+	<bean id="yoga" name="problem3.WorkoutProgram">
+			<constructor-arg  value="3"/>
+			<constructor-arg value="yoga"/>
+			<constructor-arg value="6"/>
+			
+	</bean>
+	
+	<bean id="gymManager" class="GymManager" lazy-init="true">
+        <property name="gymPrograms">
+            <map>
+                <entry key-ref="cardio" value-ref="member1" />
+                <entry key-ref="strength" value-ref="member2" />
+                <entry key-ref="yoga" value-ref="member3" />
+            </map>
+        </property>
+    </bean>
+	
+
+	
+</beans>

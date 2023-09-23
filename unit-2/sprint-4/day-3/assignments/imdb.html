@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #inputsearch {
+        width: 90%;
+        /* display: block; */
+        margin: auto;
+
+        display: flex;
+        justify-content: center;
+      }
+
+      #inputsearch input {
+        width: 60%;
+        font-size: 25px;
+      }
+
+      .container {
+        width: 90%;
+        margin: auto;
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .container > div {
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+
+      .container > div > img {
+        width: 90%;
+        height: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="inputsearch">
+      <input type="text" placeholder="Search" />
+      <button>Search</button>
+    </div>
+
+    <div class="container"></div>
+  </body>
+
+  <script>
+    let searchinp = document.querySelector("input");
+    let searchbtn = document.querySelector("button");
+
+    let container = document.querySelector(".container");
+
+    async function fetchdata(inp) {
+      try {
+        let movies = await fetch(
+          `http://www.omdbapi.com/?i=tt3896198&apikey=ee2c20bd&s=${inp}`
+        );
+        movies = await movies.json();
+        let arr = movies.Search;
+        console.log(arr);
+        console.log(arr.length);
+        // if (movies.Search.length() > 0) {
+        //   displaymovie(movies.Search);
+        // } else {
+        //   document.body.append(
+        //     (document.createElement("h1").innerText = "No Movie Found")
+        //   );
+        // }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    searchbtn.addEventListener("click", () => {
+      let searchtext = searchinp.value;
+      fetchdata(searchtext);
+    });
+
+    function displaymovie(data) {
+      container.innerHTML = "";
+      data.forEach((element) => {
+        let card = document.createElement("div");
+        let poster = document.createElement("img");
+        let title = document.createElement("h2");
+
+        let year = document.createElement("p");
+
+        poster.src = element.Poster;
+        title.innerText = element.Title;
+        year.innerText = element.Year;
+
+        card.append(poster, title, year);
+        container.append(card);
+      });
+    }
+  </script>
+</html>

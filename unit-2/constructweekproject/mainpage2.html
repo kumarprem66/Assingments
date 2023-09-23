@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .offer_pop {
+      background-color: black;
+    }
+    .offer_pop > p {
+      color: white;
+      text-align: center;
+      padding: 7px;
+    }
+
+    .up_nav {
+      display: grid;
+      grid-template-columns: 8% 12% 55% 25%;
+      align-items: center;
+
+      padding-right: 20px;
+      height: 80px;
+    }
+    .up_nav > div:nth-child(1) {
+      text-align: center;
+      /* position: fixed; */
+    }
+
+    .up_nav > div:nth-child(2) {
+      padding: 20px;
+    }
+    .up_nav > div:nth-child(2) > img {
+      width: 100%;
+    }
+
+    .up_nav > div:nth-child(3) {
+      background-color: rgb(183, 190, 197);
+      border-radius: 30px;
+      margin-right: 40px;
+      height: 70%;
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .up_nav > div:nth-child(3) > input {
+      width: 90%;
+      height: 100%;
+      font-size: 18px;
+      text-decoration: none;
+      background-color: rgb(183, 190, 197);
+      border: none;
+      padding: 10px;
+    }
+
+    .up_nav > div:nth-child(4) {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav {
+      display: flex;
+      padding: 10px;
+      margin-right: 10px;
+    }
+    .nav > h3 {
+      margin-right: 20px;
+      font-size: 17px;
+    }
+    /* =======================  main  ================== */
+    #main_cont {
+      padding-left: 7%;
+      padding-right: 20px;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      /* height: 100vh; */
+      margin-top: 80px;
+      gap: 20px;
+    }
+
+    .content > div:nth-child(1) {
+      display: flex;
+      background-color: pink;
+      font-size: 50px;
+      color: white;
+      padding: 40px;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .content > div:nth-child(1) > h1 {
+      line-height: 1.1;
+    }
+
+    .content > div:nth-child(2) {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .content > div:nth-child(2) > div > img {
+      width: 100%;
+    }
+
+    .h1_after_content {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .middle1 {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .middle1 > div {
+      width: 18%;
+      margin-right: 20px;
+    }
+
+    .middle1 > div:last-child {
+      margin-right: 0px;
+    }
+
+    .middle1 > div > img {
+      width: 100%;
+    }
+
+    .middle_long {
+      display: flex;
+      margin-top: 50px;
+    }
+
+    .middle_long > div {
+      width: 33.33%;
+      margin-right: 20px;
+    }
+    .middle_long > div:last-child {
+      margin-right: 0px;
+    }
+
+    .middle_long > div > img {
+      width: 100%;
+    }
+    .middle_long > div > div {
+      padding: 40px 20px;
+      background-color: brown;
+      color: white;
+      height: 250px;
+    }
+
+    .middle_long > div > div > h2,
+    .middle_long > div > div > p {
+      margin-bottom: 20px;
+    }
+
+    .middle_long > div > div > div {
+      display: flex;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: black;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .middle3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      /* height: 100vh; */
+      gap: 20px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      /* border: 1px solid red; */
+    }
+
+    .middle3 > div:nth-child(1) > img {
+      width: 100%;
+    }
+
+    .middle3 > div:nth-child(2) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      /* border: 1px solid green; */
+    }
+
+    .middle3 > div:nth-child(2) > div > img {
+      width: 100%;
+    }
+
+    .middle_small {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .middle_small > div {
+      width: 18%;
+      height: 250px;
+      margin-right: 20px;
+    }
+
+    .middle_small > div:last-child {
+      margin-right: 0px;
+    }
+
+    .middle_small > div > img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .middle_two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .middle_two > div > img {
+      width: 100%;
+    }
+
+    .bottom {
+      display: flex;
+      padding: 40px;
+      background-color: blue;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-top: 40px;
+      margin-bottom: 50px;
+      height: 300px;
+      color: white;
+    }
+
+    .bottom > button {
+      width: 80px;
+    }
+  </style>
+  <body>
+    <div class="offer_pop">
+      <p><i>Get 20% off* on delivery charges-limited period offer!</i></p>
+    </div>
+    <div class="up_nav">
+      <div>
+        <span class="material-icons"> menu </span>
+        <h3>Menu</h3>
+      </div>
+
+      <div>
+        <img src="./images/ikealogo.png" alt="" />
+      </div>
+
+      <div>
+        <span class="material-icons"> photo_camera </span>
+        <input type="text" placeholder="what are you looking for?" />
+        <span class="material-icons"> search </span>
+      </div>
+
+      <div>
+        <div>
+          <span class="material-icons"> person </span>
+          <h3>Hey! Log in or sign up</h3>
+        </div>
+        <i>van</i>
+        <i>cart</i>
+      </div>
+    </div>
+
+    <div id="main_cont">
+      <div class="nav">
+        <h3>Products</h3>
+        <h3>Rooms</h3>
+        <h3>New at BLUE-WOOD</h3>
+        <h3>offers</h3>
+      </div>
+
+      <div class="content">
+        <div>
+          <h1>Goodbye stress. Hello organised mess!</h1>
+        </div>
+        <div>
+          <div>
+            <img
+              src="https://www.ikea.com/ext/ingkadam/m/7cdbfd13536f1864/original/PH183006.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="	https://www.ikea.com/ext/ingkadam/m/6f5c999e57b0899c/original/PH188348-crop001.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="https://www.ikea.com/ext/ingkadam/m/6e59dcdff4cb6ebe/original/PH185829-crop001.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="	https://www.ikea.com/ext/ingkadam/m/2cdb8876440d3bfe/original/PH185831-crop001.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <h1 class="h1_after_content">
+        Categories for better storage and organisation
+      </h1>
+
+      <div class="middle1">
+        <div>
+          <img
+            src="	https://www.ikea.com/images/66/a7/66a7ad4f93664a50fa386f545860a313.jpg?f=xx"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/50/e9/50e95854f19088058cc930d33913e285.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="	https://www.ikea.com/images/7d/6b/7d6b63203c8e2ddaa5da559889004299.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="	https://www.ikea.com/images/7d/6b/7d6b63203c8e2ddaa5da559889004299.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/c7/85/c7853e88497ae33a463af264e2638233.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="middle_long">
+        <div>
+          <img
+            src="https://www.ikea.com/images/b6/15/b615d94ecd3a525330f6daebb27313f8.png?f=xs"
+            alt=""
+          />
+          <div>
+            <h2>Be Reasy for a new beginning</h2>
+            <p>
+              Our inspiration and solutions at IKEA can help you bring your
+              ideas to life.
+            </p>
+            <div>
+              <span class="material-icons"> arrow_forward </span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/db/e6/dbe6e769533011533a119680da7dfbb8.jpg?f=xs"
+            alt=""
+          />
+          <div>
+            <h2>Be Reasy for a new beginning</h2>
+            <p>
+              Our inspiration and solutions at IKEA can help you bring your
+              ideas to life.
+            </p>
+            <div>
+              <span class="material-icons"> arrow_forward </span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img
+            src="	https://www.ikea.com/images/c9/21/c921575bd1b052970fc0cac5c4136e52.png?f=xs"
+            alt=""
+          />
+          <div>
+            <h2>Be Reasy for a new beginning</h2>
+            <p>
+              Our inspiration and solutions at IKEA can help you bring your
+              ideas to life.
+            </p>
+            <div>
+              <span class="material-icons"> arrow_forward </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="h1_after_content">Explore new at BLUE-WOOD</h1>
+
+      <div class="middle3">
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/799f68cc5de0ac6b/original/PH189240.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <div>
+            <img
+              src="https://www.ikea.com/images/d8/93/d893954e5ca7add8e2eacd65a2b9ccba.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+
+          <div>
+            <img
+              src="	https://www.ikea.com/ext/ingkadam/m/6efbc36541036f65/original/PH189222.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+
+          <div>
+            <img
+              src="https://www.ikea.com/ext/ingkadam/m/329772020dd61646/original/PH189251.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+
+          <div>
+            <img
+              src="https://www.ikea.com/ext/ingkadam/m/943c2a55da77e47/original/PH189365.jpg?f=xxs"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <h1 class="h1_after_content">Top Furniture Categories</h1>
+
+      <div class="middle1">
+        <div>
+          <img
+            src="https://www.ikea.com/images/sofa-and-armchairs-8c6cd2d72c5b7ffa6c50de384c9a74c8.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/ec/6d/ec6d3a24e13d4e6bf9af8461ac082044.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/beds-c444b5a3ed3563bf37b741a0d8ce6c97.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="	https://www.ikea.com/images/75/9f/759fc4bd0f1a2c7af564ccde5755e5fd.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/fb/98/fb98ddb584696abe4e696bc7993408e6.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/d7/4e/d74e72bbf58f2fea3c75f8478e943c07.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/67/71/67713b64c75fbe5851c2756c2fa95db0.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/2d/6b/2d6b918803728f28cb6263202f51596c.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/59/66/59669cf5cbd26afe97eb35d05022e31a.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <h1 class="h1_after_content">Top Accessories Categories</h1>
+
+      <div class="middle1">
+        <div>
+          <img
+            src="	https://www.ikea.com/images/49/3e/493e241188d879a0eb919f7423a10393.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/images/ee/ee/eeee94f35b3e63d365ef79f452f70031.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/55/37/5537e2db6e63f664c33ef2c1cfd3b90b.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/images/25/7c/257cfd1795f5561023688571473f4678.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/f1/7d/f17d9897443bb614e2489e83a07cad69.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/55/37/5537e2db6e63f664c33ef2c1cfd3b90b.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            src="https://www.ikea.com/images/25/7c/257cfd1795f5561023688571473f4678.jpg?f=xxs"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <h1 class="h1_after_content">See how our products look in real homes!</h1>
+      <p>
+        Share your photos on Instagram with #IKEAlifeathome or tag @ikea.india
+        to get a chance to be seen here!
+      </p>
+
+      <div class="middle_small">
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/3b33fdd72a47984b/original/UGC100001659.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/22cb12f76d4d6800/original/UGC100001460.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/564745d4726a73a2/original/UGC100015762.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/564745d4726a73a2/original/UGC100015762.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/42924e80d3b5e393/original/UGC100014406.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/689b877f3b173860/original/UGC100015561.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/ext/ingkadam/m/71d5527a7f02d8b0/original/UGC100001389.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/31c4be989b302cd6/original/UGC100002188.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="	https://www.ikea.com/ext/ingkadam/m/2186a6be986c687a/original/UGC100001402.jpg?f=m"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="middle_two">
+        <div>
+          <img
+            src="https://www.ikea.com/images/a-hand-showing-ikea-ap…d-screen-aec02826f4ecef443ec20186fa64c7d8.jpg?f=m"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/images/a3/f8/a3f8a40082462e029a7f5b6a93184b89.jpg?f=m"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="bottom">
+        <h1>Click & Collect</h1>
+        <p>
+          You can now collect your orders from R CITY
+          Linus_Malmo_Living_Room5_65683d4ad5 (Mumbai) and Electricity City
+          (Bengaluru)
+        </p>
+
+        <button type="">Know more</button>
+      </div>
+    </div>
+  </body>
+</html>

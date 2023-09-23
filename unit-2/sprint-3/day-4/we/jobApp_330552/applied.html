@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="applied.html">Applied Jobs</a></div>
+      <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+
+    <div>
+      <select name="" id="sortname">
+        <option value="">Sort By Names</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+
+      <select name="" id="sortsalary">
+        <option value="">Sort By Salary</option>
+        <option value="high">High to Low</option>
+        <option value="low">Low To High</option>
+      </select>
+
+      <select name="" id="role">
+        <option value="">Filter by Role</option>
+        <option value="FSD">FSD</option>
+        <option value="Frontend">Frontend</option>
+        <option value="Backend">Backend</option>
+      </select>
+    </div>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job applied</th>
+            <th>Salary expected</th>
+            <th>Add to bookmark</th>
+          </tr>
+        </thead>
+        <tbody id="body">
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    //you need to code here
+
+    let parent = document.querySelector("tbody");
+
+    let data = JSON.parse(localStorage.getItem("jobList")) || [];
+
+    setdata(data);
+
+    function setdata(data) {
+      parent.innerText = "";
+      data.forEach(function (ele, index) {
+        let tr = document.createElement("tr");
+
+        let td1 = document.createElement("td");
+        td1.textContent = ele.name;
+
+        let td2 = document.createElement("td");
+        td2.textContent = ele.email;
+
+        let td3 = document.createElement("td");
+        td3.textContent = ele.jobType;
+
+        let td4 = document.createElement("td");
+        td4.textContent = ele.salary;
+
+        let td5 = document.createElement("td");
+        td5.textContent = "bookmarks";
+
+        td5.addEventListener("click", function () {
+          let jobdata = data.splice(index, 1);
+
+          let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+          bookmarks.push(jobdata[0]);
+
+          localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+          localStorage.setItem("jobList", JSON.stringify(data));
+
+          setdata(data);
+        });
+
+        tr.append(td1, td2, td3, td4, td5);
+        parent.append(tr);
+      });
+    }
+
+    let sortname = document.getElementById("sortname");
+
+    let sortsalary = document.getElementById("sortsalary");
+
+    let role = document.getElementById("role");
+
+    data = JSON.parse(localStorage.getItem("jobList")) || [];
+
+    sortname.addEventListener("change", sortByname);
+
+    sortsalary.addEventListener("change", sortBySalary);
+
+    role.addEventListener("change", filterbyrole);
+
+    function sortBySalary() {
+      let v = sortsalary.value;
+      if (v == "") {
+        return true;
+      } else if (v == "high") {
+        data.sort(function (a, b) {
+          return Number(b.salary) - Number(a.salary);
+        });
+      } else if (v == "low") {
+        data.sort(function (a, b) {
+          return Number(a.salary) - Number(b.salary);
+        });
+      }
+      setdata(data);
+    }
+
+    function sortByname() {
+      let v = sortname.value;
+      if (v == "") {
+        return true;
+      } else if (v == "asc") {
+        data.sort(compare1);
+      } else if (v == "desc") {
+        data.sort(compare2);
+      }
+
+      setdata(data);
+    }
+
+    function compare1(a, b) {
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+    function compare2(a, b) {
+      if (a.name < b.name) {
+        return 1;
+      } else if (a.name > b.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+
+    function filterbyrole() {
+      let v = role.value;
+      // data = JSON.parse(localStorage.getItem("jobList")) || [];
+      let data1 = data.filter(function (ele, index) {
+        if (v === "") {
+          return true;
+        }
+        return ele.jobType === v;
+      });
+      console.log(data1);
+      setdata(data1);
+    }
+  </script>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 90%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+      }
+      .card {
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        width: 100%;
+      }
+      .card button {
+        width: 100%;
+        background-color: blue;
+        color: white;
+        font-weight: 700;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 700px) {
+        .container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media screen and (min-width: 700px) and (max-width: 1000px) {
+        .container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CART PAGE</h1>
+    <div class="container"></div>
+  </body>
+  <script>
+    let containerel = document.querySelector(".container");
+    let fetcheddata = JSON.parse(localStorage.getItem("cart_products")) || [];
+
+    console.log(fetcheddata);
+    displayproducts(fetcheddata);
+
+    function displayproducts(data) {
+      containerel.innerHTML = "";
+      data.forEach((element, index) => {
+        let productsCards = document.createElement("div");
+        productsCards.setAttribute("class", "card");
+        let img = document.createElement("img");
+        img.setAttribute("src", element.image);
+
+        let title = document.createElement("h2");
+        title.innerText = element.title;
+
+        let price = document.createElement("h4");
+        price.textContent = element.price;
+
+        let buynow = document.createElement("button");
+        buynow.innerText = "Buy Now";
+
+        buynow.addEventListener("click", function () {
+          data.splice(index, 1);
+
+          localStorage.setItem("cart_products", JSON.stringify(data));
+          displayproducts(data);
+        });
+
+        productsCards.append(img, title, price, buynow);
+        containerel.append(productsCards);
+      });
+    }
+  </script>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    form {
+      margin: auto;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      width: 500px;
+    }
+    form input[type="text"] {
+      width: 70%;
+    }
+    form input {
+      font-size: 25px;
+    }
+
+    #container {
+      width: 90%;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 30px;
+    }
+    #container > div {
+      text-align: center;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+    #container > div img {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 700px) {
+      #container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (min-width: 700px) and (max-width: 1000px) {
+      #container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+  <body>
+    <form action="">
+      <input type="text" placeholder="Search" id="search" />
+      <input type="submit" value="Search" />
+    </form>
+    <div id="container"></div>
+  </body>
+
+  <script>
+    let api = "https://restcountries.com/v3.1/all";
+
+    let container = document.getElementById("container");
+    let searchform = document.querySelector("form");
+
+    let fetcheddata = [];
+
+    asyncFetch();
+
+    async function asyncFetch() {
+      try {
+        let request = await fetch(api);
+        let data = await request.json();
+
+        fetcheddata = data.map(function (element) {
+          return {
+            name: element.name.official,
+            population: element.population,
+            continent: element.continents[0],
+            flag: element.flags.png,
+          };
+        });
+        console.log(fetcheddata);
+        Display(fetcheddata);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function Display(data) {
+      container.innerHTML = "";
+      data.forEach((element) => {
+        let card = document.createElement("div");
+
+        let img = document.createElement("img");
+        img.setAttribute("src", element.flag);
+
+        let name = document.createElement("h2");
+        name.innerText = element.name;
+
+        let population = document.createElement("p");
+        population.textContent = element.population;
+
+        let continent = document.createElement("p");
+        continent.innerText = element.continent;
+
+        card.append(img, name, population, continent);
+        container.append(card);
+      });
+    }
+
+    searchform.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let searchparams = searchform.search.value;
+
+      let filtered = fetcheddata.filter((element) => {
+        if (element.name.toUpperCase().includes(searchparams.toUpperCase())) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      Display(filtered);
+    });
+  </script>
+</html>

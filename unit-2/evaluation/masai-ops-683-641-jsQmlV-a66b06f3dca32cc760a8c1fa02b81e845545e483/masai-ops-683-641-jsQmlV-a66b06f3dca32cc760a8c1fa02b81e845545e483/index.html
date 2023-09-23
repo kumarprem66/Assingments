@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* All Your css for Home page goes here  */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #menu-container {
+        padding: 30px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      #menu-container > div:nth-child(1) > img {
+        width: 100%;
+      }
+
+      #menu-container > div {
+        background-color: darkgray;
+        padding: 15px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 10px;
+      }
+
+      #menu-container > div > div:nth-child(1) > img {
+        width: 100%;
+        height: 250px;
+      }
+      #menu-container > div > div:nth-child(2) > div {
+        display: flex;
+        justify-content: space-between;
+      }
+      #menu-container > div > div:nth-child(2) > button{
+        padding: 10px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      #filter {
+        margin-top: 20px;
+       display: flex;
+       justify-content: center;
+       
+      }
+      #filter>input{
+        font-size: 20px;
+      }
+      #sort{
+        display: block;
+        margin: auto;
+        font-size: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <h1>Web Coffee Shop Menu</h1>
+      <a href="./index.html">Home</a>
+      <a href="./order.html">Ordered</a>
+    </div>
+    <div id="filter">
+      <input type="number" id="lower" />
+      <input type="number" id="upper" />
+      <button id="filter-btn">Filter</button>
+    </div>
+    <select id="sort">
+      <option value="">Sort By Price</option>
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+    <h1 id="alert"></h1>
+    <div id="menu-container">
+      <!-- Here Append All the Items  -->
+    </div>
+  </body>
+  <script>
+    // All your JS code for Home Page goes here
+    const url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee`;
+
+    let container = document.getElementById("menu-container");
+
+    
+    let sort = document.getElementById("sort");
+    let filter_btn = document.getElementById("filter-btn");
+
+    let alerttext = document.getElementById("alert");
+
+    let totaldata = [];
+
+    let localdata = JSON.parse(localStorage.getItem("buy")) || [];
+
+    async function fetchdata(url) {
+      let coffeedata = await fetch(url);
+      coffeedata = await coffeedata.json();
+      totaldata = coffeedata.data;
+      displaycoffee(coffeedata.data);
+
+      // console.log(coffeedata.data);
+    }
+
+    fetchdata(url);
+
+    function displaycoffee(data) {
+
+      container.innerText = "";
+      data.forEach((element) => {
+        let outdiv = document.createElement("div");
+        let imgdiv = document.createElement("div");
+
+        let image = document.createElement("img");
+        image.src = element.image;
+        imgdiv.append(image);
+
+        let desdiv = document.createElement("div");
+
+        let h2 = document.createElement("h2");
+        h2.innerText = element.title;
+
+        let titlediv = document.createElement("div");
+
+        let p1 = document.createElement("p");
+
+        let ingre = element.ingredients;
+        ingre.forEach((i) => {
+          let p1 = document.createElement("p");
+          p1.innerText = i;
+          titlediv.append(p1);
+        });
+
+        let des = document.createElement("p");
+        des.innerText = element.description;
+        let price = document.createElement("h3");
+        price.innerText = `Rs. ${element.price}`;
+
+        let buy = document.createElement("button");
+        buy.innerText = "Buy";
+
+        buy.addEventListener("click",function(){
+
+
+
+          if (checkDuplicate(element)) {
+            alerttext.innerText = "Already Placed Order";
+          } else {
+            localdata.push({ ...element, quantity: 1 });
+            localStorage.setItem("buy", JSON.stringify(localdata));
+            alerttext.innerText = "Successfully Placed Order";
+          }
+         
+
+        })
+
+        desdiv.append(h2, titlediv, des, price, buy);
+
+        outdiv.append(imgdiv, desdiv);
+
+        container.append(outdiv);
+      });
+    }
+  
+    sort.addEventListener("change",function(){
+      console.log(sort.value);
+      if(sort.value==""){
+        fetchdata(url)
+      }else if(sort.value=="asc"){
+        fetchdata("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?sort=price&order=asc")
+      }else if(sort.value=="desc"){
+        fetchdata("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?sort=price&order=desc")
+      }
+    });
+
+
+    filter_btn.addEventListener("click",function(){
+      let low = document.getElementById("lower").value;
+      let high = document.getElementById("upper").value;
+
+      let totaldata1 = totaldata.filter((element)=>{
+        if(element.price>=Number(low) && element.price<=Number(high)){
+          return true
+        }
+      })
+
+      displaycoffee(totaldata1);
+
+    })
+  
+    function checkDuplicate(product) {
+      for (let i = 0; i < localdata.length; i++) {
+        if (localdata[i].id === product.id) {
+          return true;
+        }
+      }
+      return false;
+    }
+  
+  </script>
+</html>

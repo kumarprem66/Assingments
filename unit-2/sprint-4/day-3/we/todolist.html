@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    table tr {
+      background-color: aqua;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>TITLE</td>
+          <td>STATUS</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+  <script>
+    let parent = document.querySelector("tbody");
+    let api = "https://jsonplaceholder.typicode.com/todos";
+    let todolist = [];
+    fetch(api)
+      .then((request) => {
+        return request.json();
+      })
+      .then((data) => {
+        todolist = data;
+        showtable(todolist);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    function showtable(data) {
+      data.forEach((element) => {
+        let tr = document.createElement("tr");
+
+        let td1 = document.createElement("td");
+        td1.textContent = element.id;
+
+        let td2 = document.createElement("td");
+        td2.textContent = element.title;
+
+        let td3 = document.createElement("td");
+        td3.textContent = element.completed;
+
+        tr.append(td1, td2, td3);
+        parent.append(tr);
+      });
+    }
+  </script>
+</html>

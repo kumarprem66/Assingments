@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		
+		
+		
+		
+	<bean id="mbc" class="com.masai.school.bean.practice.MyBusinessClass" />
+	
+	<bean id="c" class="com.masai.school.bean.practice.Car" />
+	<bean id="b" class="com.masai.school.bean.practice.Bike" />
+	
+	<bean id="t" class="com.masai.school.bean.practice.Travel">
+		<constructor-arg ref="b"/>
+		<constructor-arg value="10"/>
+	</bean> 
+	
+	
+	<bean id="bc" class="circularBean.B">
+		<property name="a1" ref="ac"></property>
+	</bean>
+	<bean id="ac" class="circularBean.A">
+		<constructor-arg ref="bc"/>
+	</bean>
+	
+	
+
+	<!-- 
+	
+	<bean id="restaurant" class="zomato.RestaurantService"></bean>
+	<bean id="order" class="zomato.OrderService">
+		<property name="restaurantService" ref="restaurant"></property>
+	</bean>
+	<bean id="delivery" class="zomato.DeliveryService">
+		<property name="orderService" ref="order"></property>
+	</bean>
+	
+	
+	<bean id="userser" class="netflix.UserService">
+		<property name="recommendationService" ref="reccommen"></property>
+	</bean>
+		<bean id="reccommen" class="netflix.RecommendationService">
+		<property name="contentService" ref="content"></property>
+	</bean>
+	<bean id="content" class="netflix.ContentService">
+		<property name="userService" ref="userser"></property> 
+	</bean>
+	-->
+
+<!--                               auto wiring by name                     -->
+
+
+
+<!--
+	<bean id ="order" class="autowiring.MyOrder">
+		<property name="orderDetails" value="Sample Order"/>
+	</bean>
+	
+	<bean id="customer" class="autowiring.Customer" autowire="byName">
+		
+	</bean>
+
+ <bean id="customer" class="autowiring.Customer" autowire="byName"></bean>-->
+
+
+<bean id="myorder" class="autowiring.MyOrder">
+    <property name="orderDetails" value="Sample Order"/>
+</bean>
+
+<bean id="customer" class="autowiring.Customer" autowire="byName">
+    <property name="myOrder" ref="myorder"/>
+</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</beans>

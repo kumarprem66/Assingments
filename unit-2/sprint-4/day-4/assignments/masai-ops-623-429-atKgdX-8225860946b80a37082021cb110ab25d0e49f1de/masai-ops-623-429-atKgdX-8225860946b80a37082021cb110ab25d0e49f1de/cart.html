@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <style>
+      /* Write all necessery css here  */
+      .nav {
+        /* border: 2px solid red; */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      #cart-container {
+        /* border: 2px solid red; */
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20%;
+        grid-gap: 20px;
+        /* margin: auto; */
+        justify-content: center;
+      }
+      #cart-container > div {
+        /* border: 2px solid red; */
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 10px;
+      }
+      #cart-container > div > img {
+        height: 200px;
+        width: 100%;
+      }
+      #cart-container > div > button {
+        /* display: block;
+         margin: auto; */
+        background-color: rgb(81, 201, 245);
+        color: white;
+        padding: 5px;
+        border: none;
+        border-radius: 3px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Masai E-Commerce</h1>
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+    </div>
+    <h1 id="total">
+      Your Total cart Price is:- <span id="cart-total">0</span>
+    </h1>
+    <div id="cart-container">
+      <!-- Here Append All the cart Products  -->
+    </div>
+  </body>
+  <script>
+    // Write all necessery JS here
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let container = document.getElementById("cart-container");
+    function displayProduct(data) {
+      let total = document.getElementById("cart-total");
+      container.innerHTML = "";
+      cart.forEach((element) => {
+        let card = document.createElement("div");
+        let image = document.createElement("img");
+        let brand = document.createElement("h3");
+        let category = document.createElement("p");
+        let details = document.createElement("p");
+        let quantity = document.createElement("span");
+        let price = document.createElement("h4");
+        
+        let Remove = document.createElement("button");
+        let Increment = document.createElement("button");
+        let Decrement = document.createElement("button");
+        quantity.textContent = element.quantity;
+        Remove.textContent = "Remove";
+        Increment.textContent = "+";
+        Decrement.textContent = "-";
+        image.src = element.img;
+        brand.textContent = element.brand;
+        category.textContent = element.category;
+        price.textContent = `₹${element.price}`;
+        details.textContent = element.details;
+
+        Remove.addEventListener("click", () => {
+          cart = cart.filter((ele) => {
+            return ele.id !== element.id;
+          });
+          localStorage.setItem("cart", JSON.stringify(cart));
+          displayProduct();
+        });
+
+        Increment.addEventListener("click", () => {
+          element = element.quantity++;
+          localStorage.setItem("cart", JSON.stringify(cart));
+          displayProduct();
+        });
+        Decrement.addEventListener("click", () => {
+          if (element.quantity > 1) {
+            element = element.quantity--;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayProduct();
+          }
+        });
+
+        card.append(
+          image,
+          brand,
+          price,
+          details,
+          category,
+          Increment,
+          quantity,
+          Decrement,
+          Remove
+        );
+        container.append(card);
+      });
+
+      let sum = 0;
+      for (let i = 0; i < cart.length; i++) {
+        sum += cart[i].price * cart[i].quantity;
+      }
+
+      total.textContent = sum;
+    }
+
+    displayProduct();
+  </script>
+</html>

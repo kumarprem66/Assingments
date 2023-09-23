@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        width: 100vw;
+        height: 100vh;
+    }
+    .navbar{
+        height: 70px;
+        background-color: brown;
+    }
+    .container{
+        padding: 30px;
+        display: grid;
+        border: 1px solid violet;
+        gap: 20px;
+        grid-template-columns: 40% 60%;
+    }
+    .form_ele{
+        
+        height: 50px;
+        /* border: 1px solid red; */
+    }
+    .blogsContainer{
+        border: 1px solid black;
+    }
+    .navbar h1{
+        font-size: 20px;
+        color: white;
+        text-align: center;
+
+    }
+    .form_ele input{
+        width: 100%;
+        /* height: 50px; */
+        /* height: 100%; */
+    }
+    .blogsContainer{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .blogsContainer .card{
+       width: 300px;
+       margin: 10px;
+       border: 1px solid salmon;
+       border-radius: 10px;
+
+    }
+</style>
+<body>
+    
+    <div class="navbar">
+
+        <h1>BLOG</h1>
+
+
+    </div>
+   
+    <div class="container">
+        <div class="create_blog">
+
+            <div class="form_ele">
+                <label for="">Enter Id</label>
+                <input type="number" class="blog_id">
+            </div>
+
+           <div class="form_ele">
+                <label for="">Enter Title</label>
+                <input type="text" class="blog_title">
+           </div>
+
+           <div class="form_ele">
+                <label for="">Enter Content</label>
+                <input type="text" class="blog_content">
+           </div>
+
+           <div class="form_ele">
+                <label for="">Enter publicationDate</label>
+                <input type="date"class="blog_date" rows="10",cols="10">
+
+           </div>
+           <div class="form-ele">
+            <input type="submit" id="blog_submit" />
+          </div>
+        
+
+        </div>
+
+        <div class="blogsContainer">
+            <div class="card"></div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let blogCon = document.querySelector(".blogsContainer");
+
+    let array_blogs = [];
+
+    fetchUser();
+ 
+function saveUser(){
+   
+    
+   let id = document.querySelector(".create_blog .blog_id").value;
+   let title = document.querySelector(".create_blog .blog_title").value;
+   let content = document.querySelector(".create_blog .blog_content").value;
+   let pub_date = document.querySelector(".create_blog .blog_date").value;
+   
+   
+   
+        fetch("http://localhost:8080/createBlog",{
+            method : "POST",
+            headers : {
+                "content-type":"application/json"
+            },
+            body : JSON.stringify({
+                
+                "blogId":id,
+                "title":title,
+                "content":content,
+                "publicationDate":pub_date,
+                
+                
+            })
+        }).then(response=>{
+            if(response.status == 201 || response.status == 200){
+                response.json().then(data => {
+                    alert("blog created successfully : "+data.title)
+                })
+            }else{
+                response.json().then(data => alert("failed"))
+            }
+        }).catch(error=>{
+            alert(error)
+        });
+   
+           // const data = await response.json();
+     
+   }
+
+
+document.getElementById("blog_submit").addEventListener("click",saveUser)
+
+
+function fetchUser(){
+
+   
+        fetch("http://localhost:8080/Blogs",{
+            method : "GET",
+            headers : {
+                "content-type":"application/json"
+            },
+          
+        }).then(response=>{
+            if(response.status == 202 || response.status == 200){
+                response.json().then(data => {
+
+
+                    array_blogs = data;
+                    console.log(data)
+                    array_blogs.forEach(element => {
+                          let card = document.createElement("div");
+                            let id = document.createElement("h1");
+                            id.textContent = element.id;
+                            let title = document.createElement("h3");
+                            title.textContent = element.title;
+                            let content = document.createElement("p");
+                            content.textContent = element.content;
+                            let date = document.createElement("h2");
+                            date.textContent  = element.publicationDate;
+                            card.append(id);
+                            card.append(title);
+                            card.append(content);
+                            card.append(date);
+
+                    blogCon.append(card);
+
+                    });
+                  
+
+
+                    // alert("blog created successfully : "+data)
+                })
+            }else{
+                response.json().then(data => alert("failed"))
+            }
+        }).catch(error=>{
+            alert(error)
+        });
+   
+           // const data = await response.json();
+     
+   }
+
+</script>
+</html>

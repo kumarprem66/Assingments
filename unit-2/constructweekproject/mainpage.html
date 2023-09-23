@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    .offer_pop {
+      background-color: black;
+    }
+    .offer_pop > p {
+      color: white;
+      text-align: center;
+    }
+
+    .up_nav {
+      display: grid;
+      grid-template-columns: 10% 60% 30%;
+    }
+
+    .up_nav > div:nth-child(2) > div {
+      background-color: darkgray;
+      border-radius: 30px;
+    }
+
+    .up_nav > div:nth-child(2) > div > input {
+      width: 70%;
+
+      padding: 10px;
+      font-size: 25px;
+    }
+    .up_nav > div:nth-child(2) > img {
+      width: 20%;
+    }
+  </style>
+  <body>
+    <div class="offer_pop">
+      <p><i>Get 20% off* on delivery charges-limited period offer!</i></p>
+    </div>
+    <div class="up_nav">
+      <div>
+        <span class="material-icons"> menu </span>
+        <h3>Menu</h3>
+      </div>
+      <div>
+        <img src="./images/ikealogo.png" alt="" />
+        <div>
+          <span class="material-icons"> photo_camera </span>
+          <input type="text" placeholder="what are you looking for?" />
+          <span class="material-icons"> search </span>
+        </div>
+      </div>
+      <div>
+        <div>
+          <span class="material-icons"> person </span>
+          <h3>Hey! Log in or sign up</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <i>Products</i>
+      <i>Rooms</i>
+      <i>New at BLUE-WOOD</i>
+      <i>offers</i>
+    </div>
+  </body>
+</html>

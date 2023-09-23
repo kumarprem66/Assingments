@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visited Page</title>
+    <style>
+      /* All Your css here  */
+
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+
+      #visited-total {
+        color: red;
+      }
+      .table_content {
+        border-collapse: collapse;
+        width: 90%;
+        text-align: center;
+        padding: 10px;
+        margin: auto;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        font-size: 0.9em;
+      }
+
+      .table_content thead tr {
+        background-color: #009879;
+        padding: 10px;
+        font-weight: bold;
+      }
+
+      .table_content th {
+        color: white;
+        padding: 12px 15px;
+      }
+
+      .table_content td {
+        padding: 12px 15px;
+      }
+
+      .table_content td:last-child {
+        background-color: red;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .table_content tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .table_content tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      .table_content tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Masai Country Records</h1>
+      <a href="./index.html">Home</a>
+      <a href="./visited.html">Visited</a>
+    </div>
+    <h1 id="total">
+      You have visited total <span id="visited-total">0</span> countries.
+    </h1>
+    <table class="table_content">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Country</th>
+          <th>Rank</th>
+          <th>Population</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Here all rows will be appended  -->
+      </tbody>
+    </table>
+  </body>
+  <script>
+    // Write All JS Here
+
+    let sizele = document.getElementById("visited-total");
+    let parent = document.querySelector("tbody");
+    let visitedarray = JSON.parse(localStorage.getItem("visited")) || [];
+
+    displaydata(visitedarray);
+
+    function displaydata(data) {
+      parent.innerHTML = "";
+      sizele.innerText = visitedarray.length;
+      data.forEach((element, index) => {
+        let tr = document.createElement("tr");
+
+        let id = document.createElement("td");
+        id.textContent = element.id;
+        let country = document.createElement("td");
+        country.textContent = element.country;
+        let rank = document.createElement("td");
+        rank.textContent = element.Rank;
+        let population = document.createElement("td");
+        population.textContent = element.population;
+
+        let remove = document.createElement("td");
+        remove.textContent = "Remove";
+
+        remove.addEventListener("click", () => {
+          visitedarray.splice(index, 1);
+
+          localStorage.setItem("visited", JSON.stringify(visitedarray));
+
+          visitedarray = JSON.parse(localStorage.getItem("visited"));
+
+          displaydata(visitedarray);
+        });
+
+        tr.append(id, country, rank, population, remove);
+        parent.append(tr);
+      });
+    }
+  </script>
+</html>

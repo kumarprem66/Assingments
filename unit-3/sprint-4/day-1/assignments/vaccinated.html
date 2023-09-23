@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+
+    header{
+        display: flex;
+        padding: 20px;
+        /* justify-content: flex-end; */
+        border: 1px solid red;
+    }
+    nav{
+        display: flex;
+        width: 70%;
+        justify-content: space-evenly;
+        /* border: 1px solid black; */
+    }
+    nav>a{
+        font-size: 20px;
+        font-weight: 700;
+        text-decoration: none;
+        color: black;
+    }
+
+    nav>a:nth-child(2){
+        color: green;
+    }
+
+    .container{
+        width: 80%;
+        margin: auto;
+    }
+    #sorting{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        font-size: 20px;
+    }
+
+    table{
+        border: 1px solid red;
+        text-align: center;
+        
+    }
+    .deletebtn,.vaccinebtn{
+        cursor: pointer;
+    }
+
+    .otp_container{
+        height: 100vh;
+        /* visibility: hidden; */
+        opacity: 0;
+       
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    input{
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+        margin-right: 10px;
+    }
+    .otp_container.active{
+        opacity: 1;
+
+    }
+
+    .otp_btn{
+cursor: pointer;
+    }
+
+</style>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Register</a>
+           <a href="dashboard.html">Dashboard</a>
+           <a href="vaccinated.html">Vaccinated</a>
+        </nav>
+    </header>
+
+    <div id="sorting">
+        <button id="sortage">Sort by Age</button>
+        <select name="" id="priority">
+            <option value="">flter by priority</option>
+            <option value="p0">p0</option>
+            <option value="p1">p1</option>
+            <option value="p2">p2</option>
+            <option value="p3">p3</option>
+        </select>
+        <select name="" id="vaccine">
+            <option value="">filter by Vaccine</option>
+            <option value="Covishield">Covishield</option>
+            <option value="Covaxin">Covaxin</option>
+            <option value="Sputnik">Sputnik</option>
+        </select>
+    </div>
+    <div class="container">
+
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Designation</td>
+                    <td>Priority</td>
+                    <td>Vaccine</td>
+                    <td>OTP</td>
+                    <td>Delete</td>
+                    <td>Vaccinated</td>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+    </div>
+    <div class="otp_container">
+        <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')" id="first">
+        <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')" id="second">
+        <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')" id="third">
+        <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')" id="forth">
+        <button class="otp_btn">Check</button>
+    </div>
+</body>
+<script>
+    let parent = document.querySelector("tbody");
+
+    let userdata =  JSON.parse(localStorage.getItem("registerdata")) || [];
+
+    let otpnumberSaved,rname,vaccineName,currentId;
+
+
+    display(userdata);
+
+    function display(data){
+
+        parent.innerText = "";
+
+        data.forEach((element,ind) => {
+        let tr = document.createElement("tr");
+        
+
+        let id = document.createElement("td");
+        id.innerText = element.id;
+        let name = document.createElement("td");
+        name.textContent = element.name;
+        let age = document.createElement("td");
+        age.textContent = element.age;
+        let desig = document.createElement("td");
+        desig.textContent = element.desig;
+        let prio = document.createElement("td");
+        prio.textContent = element.priority;
+        let vacc = document.createElement("td");
+        vacc.textContent = element.vaccine;
+        let otp = document.createElement("td");
+        otp.textContent = element.otp;
+
+        let del = document.createElement("td");
+        del.classList.add("deletebtn")
+        del.textContent = "Delete";
+
+        del.addEventListener("click",function(){
+
+            data.splice(ind,1);
+            localStorage.setItem("registerdata",JSON.stringify(data));
+            let afterdelete = JSON.parse(localStorage.getItem("registerdata")) || [];
+            display(afterdelete)
+        })
+
+
+
+        let vac = document.createElement("td");
+        vac.classList.add("vaccinebtn")
+        vac.textContent = "Vaccinate";
+
+        
+
+        vac.addEventListener("click",function(){
+            
+
+           otpnumberSaved = element.otp;
+           rname = element.name;
+           vaccineName = element.vaccine;
+           currentId = element.id;
+
+
+
+            // let ele = data[ind];
+            // let vaccinateUser = localStorage.getItem("vaccinated") || [];
+            // vaccinateUser.push(ele[0]);
+            // localStorage.setItem("vaccinated",JSON.stringify(vaccinateUser));
+
+
+            // localStorage.setItem("registerdata",JSON.stringify(data));
+            // let afterdelete = JSON.parse(localStorage.getItem("registerdata")) || [];
+            // display(afterdelete)
+          
+
+           document.querySelector(".otp_container").classList.add("active");
+
+        
+
+
+        })
+
+        tr.append(id,name,age,desig,prio,vacc,otp,del,vac);
+        parent.append(tr);
+    });
+    }
+
+
+    document.querySelector(".otp_btn").addEventListener("click",function(){
+        let f =  document.getElementById("first").value;
+        let s =  document.getElementById("second").value;
+        let t =  document.getElementById("third").value;
+        let fo =  document.getElementById("forth").value;
+
+        
+
+
+        let enterOtp = f+s+t+fo;
+        console.log(enterOtp);
+        if(otpnumberSaved==enterOtp){
+
+            alert(`${rname} added to queeue`);
+
+            let vaccinateUser = JSON.parse(localStorage.getItem("vaccinated")) || [];
+            
+
+            let vacci = userdata.filter((item)=>{
+                return item.id == currentId;
+            });
+
+            console.log(vacci);
+            vaccinateUser.push(vacci);
+
+            localStorage.setItem("vaccinated",JSON.stringify(vaccinateUser));
+            // display(userdata);
+
+
+            userdata = userdata.filter((item)=>{
+                return item.id != currentId;
+            });
+
+            localStorage.setItem("registerdata",JSON.stringify(userdata));
+            display(userdata);
+        }
+
+        setTimeout(()=>{
+            alert(`vaccinating ${vaccineName}`)
+        },1000);
+
+        setTimeout(()=>{
+            alert(`${rname} vaccinated`)
+        },2000);
+
+      setTimeout(()=>{
+            document.querySelector(".otp_container").classList.remove("active");
+        },2000);
+
+
+
+        // let ele = userdata.splice(index,1);
+
+        // let vaccinateUser = localStorage.getItem("vaccinated") || [];
+        // vaccinateUser.push(ele[0]);
+        // localStorage.setItem("vaccinated",JSON.stringify(vaccinateUser));
+
+        // localStorage.setItem("registerdata",JSON.stringify(userdata));
+
+        // display(userdata)
+
+    })
+
+
+    document.getElementById("sortage").addEventListener("click",function(){
+        userdata.sort((a,b)=>{
+            return a.age-b.age;
+        })
+        display(userdata)
+    })
+
+    document.getElementById("priority").addEventListener("change",function(){
+        let selected = document.getElementById("priority").value;
+        if(selected!=""){
+            let filpri = userdata.filter((item)=>{
+            return item.priority==selected;
+        })
+        display(filpri);
+        }else{
+            display(userdata)
+        }
+       
+    });
+
+    document.getElementById("vaccine").addEventListener("change",function(){
+        let vaccine2 = document.getElementById("vaccine").value;
+        if(vaccine2!=""){
+            let vaccdata = userdata.filter((item)=>{
+            return item.vaccine==vaccine2;
+        })
+        display(vaccdata);
+        }else{
+            display(userdata)
+        }
+       
+    });
+   
+</script>
+</html>

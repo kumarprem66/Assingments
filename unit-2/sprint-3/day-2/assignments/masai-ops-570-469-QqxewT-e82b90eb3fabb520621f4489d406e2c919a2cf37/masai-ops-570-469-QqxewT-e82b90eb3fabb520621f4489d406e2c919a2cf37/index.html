@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Employee Records</title>
+  </head>
+  <body>
+    <!-- Use this form for taking the inputs  -->
+    <form>
+      <input placeholder="Name" type="text" id="name" />
+      <input placeholder="Employee ID" type="text" id="employee_id" />
+      <select id="department">
+        <option value="">Select Department</option>
+        <option value="HR">HR</option>
+        <option value="Finance">Finance</option>
+        <option value="Engineering">Engineering</option>
+      </select>
+      <input placeholder="Experience" type="number" id="experience" />
+      <input placeholder="Email" type="email" id="email" />
+      <input placeholder="Mobile No." type="number" id="mobile" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Use this select tag for filtering  -->
+    <select id="filter">
+      <option value="">Select Department</option>
+      <option value="HR">HR</option>
+      <option value="Finance">Finance</option>
+      <option value="Engineering">Engineering</option>
+    </select>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Employee ID</th>
+          <th>Department</th>
+          <th>Experience in Years</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Role</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append Rows here using JS & DOM  -->
+      </tbody>
+    </table>
+  </body>
+  <script>
+    let formele = document.querySelector("form");
+    let tbodyele = document.querySelector("tbody");
+    let name = document.getElementById("name");
+    let employee_id = document.getElementById("employee_id");
+    let department = document.getElementById("department");
+    let experience = document.getElementById("experience");
+    let email = document.getElementById("email");
+    let mobile = document.getElementById("mobile");
+
+    let filterele = document.getElementById("filter");
+    let options = document.querySelectorAll("option");
+
+    let arr = [];
+
+    formele.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let tableData = {
+        name: name.value,
+        emp_id: employee_id.value,
+        dept: department.value,
+        exp: experience.value,
+        email: email.value,
+        mobile: mobile.value,
+      };
+
+      arr.push(tableData);
+      tbodyele.innerText = "";
+      for (let i = 0; i < arr.length; i++) {
+        let row = document.createElement("tr");
+
+        let col1 = document.createElement("td");
+        col1.innerText = arr[i].name;
+
+        let col2 = document.createElement("td");
+        col2.innerText = arr[i].emp_id;
+
+        let col3 = document.createElement("td");
+        col3.innerText = arr[i].dept;
+
+        let col4 = document.createElement("td");
+        col4.innerText = arr[i].exp;
+
+        let col5 = document.createElement("td");
+        col5.innerText = arr[i].email;
+
+        let col6 = document.createElement("td");
+        col6.innerText = arr[i].mobile;
+
+        let col7 = document.createElement("td");
+        let role = "";
+        if (arr[i].exp <= 1) {
+          role = "Trainee";
+        } else if (arr[i].exp >= 2 && arr[i].exp <= 5) {
+          role = "Junior";
+        } else {
+          role = "Senior";
+        }
+
+        col7.innerText = role;
+
+        let col8 = document.createElement("td");
+        col8.innerText = "Delete";
+
+        col8.addEventListener("click", function (e) {
+          // alert("deleted");
+
+          arr.splice(i, 1);
+          // console.log(arr);
+        });
+
+        row.append(col1, col2, col3, col4, col5, col6, col7, col8);
+        tbodyele.append(row);
+      }
+    });
+
+    filterele.addEventListener("change", function (e) {
+      arr = arr.filter(filterRow);
+
+      //   for (let i = 0; i < arr.length; i++) {
+      //     let row = document.createElement("tr");
+
+      //     let col1 = document.createElement("td");
+      //     col1.innerText = arr[i].name;
+
+      //     let col2 = document.createElement("td");
+      //     col2.innerText = arr[i].emp_id;
+
+      //     let col3 = document.createElement("td");
+      //     col3.innerText = arr[i].dept;
+
+      //     let col4 = document.createElement("td");
+      //     col4.innerText = arr[i].exp;
+
+      //     let col5 = document.createElement("td");
+      //     col5.innerText = arr[i].email;
+
+      //     let col6 = document.createElement("td");
+      //     col6.innerText = arr[i].mobile;
+
+      //     let col7 = document.createElement("td");
+      //     let role = "";
+      //     if (arr[i].exp <= 1) {
+      //       role = "Trainee";
+      //     } else if (arr[i].exp >= 2 && arr[i].exp <= 5) {
+      //       role = "Junior";
+      //     } else {
+      //       role = "Senior";
+      //     }
+
+      //     col7.innerText = role;
+
+      //     let col8 = document.createElement("td");
+      //     col8.innerText = "Delete";
+
+      //     col8.addEventListener("click", function (e) {
+      //       // alert("deleted");
+
+      //       arr.splice(i, 1);
+      //       // console.log(arr);
+      //     });
+
+      //     row.append(col1, col2, col3, col4, col5, col6, col7, col8);
+      //     tbodyele.append(row);
+      //   }
+    });
+    // console.log(arr);
+    // alert(filterele.value);
+    // if (filterele.value == "Dentist") {
+
+    // } else if (filterele.value == "Dermatologist") {
+
+    // } else if (filterele.value == "Gynecologist") {
+
+    // }
+
+    function filterRow(item) {
+      return item.spec == filterele.value;
+    }
+  </script>
+</html>

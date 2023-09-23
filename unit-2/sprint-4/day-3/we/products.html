@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 90%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+      .card {
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        width: 100%;
+      }
+      .card button {
+        width: 100%;
+        background-color: blue;
+        color: white;
+        font-weight: 700;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+      }
+      #navbar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 70px;
+        background-color: aqua;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+
+      /* #navbar a {
+        text-align: end;
+        align-items: center;
+      } */
+
+      @media screen and (max-width: 700px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media screen and (min-width: 700px) and (max-width: 1000px) {
+        .container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <div class="sort">
+        <select name="price" id="price">
+          <option value="">price sort</option>
+          <option value="des">High to low</option>
+          <option value="asc">low to high</option>
+        </select>
+      </div>
+      <div class="search">
+        <input type="text" />
+        <button>Search</button>
+      </div>
+      <a href="./cart.html"><h2>Go to cart</h2></a>
+    </div>
+    <div class="container"></div>
+  </body>
+  <script>
+    const api = "https://fakestoreapi.com/products";
+    let containerel = document.querySelector(".container");
+    let fetcheddata = [];
+    fetch(api)
+      .then((request) => {
+        return request.json();
+      })
+      .then((data) => {
+        fetcheddata = data;
+        displayproducts(fetcheddata);
+      })
+      .catch((ele) => {
+        console.log(err);
+      });
+
+    let sortele = document.getElementById("price");
+    sortele.addEventListener("change", sortprice);
+
+    function sortprice() {
+      let selectvalue = sortele.value;
+      if (selectvalue == "") {
+      } else if (selectvalue == "asc") {
+        fetcheddata.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      } else if (selectvalue == "des") {
+        fetcheddata.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      }
+
+      displayproducts(fetcheddata);
+    }
+
+    let searchbtn = document.querySelector(".search button");
+    searchbtn.addEventListener("click", searchitem);
+
+    function searchitem() {
+      let inputtext = document.querySelector(".search input").value;
+      let filterdata = fetcheddata.filter(function (ele) {
+        if (inputtext == "") {
+          return true;
+        } else if (ele.title.toUpperCase().includes(inputtext.toUpperCase())) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      displayproducts(filterdata);
+    }
+
+    function displayproducts(data) {
+      containerel.innerHTML = "";
+      data.forEach((element) => {
+        let productsCards = document.createElement("div");
+        productsCards.setAttribute("class", "card");
+        let img = document.createElement("img");
+        img.setAttribute("src", element.image);
+
+        let title = document.createElement("h2");
+        title.innerText = element.title;
+
+        let desc = document.createElement("p");
+        desc.innerText = element.description;
+
+        let price = document.createElement("h4");
+        price.textContent = element.price;
+
+        let addtocart = document.createElement("button");
+        addtocart.innerText = "Add To Cart";
+
+        addtocart.addEventListener("click", function () {
+          let cartitem =
+            JSON.parse(localStorage.getItem("cart_products")) || [];
+          cartitem.push(element);
+          localStorage.setItem("cart_products", JSON.stringify(cartitem));
+        });
+
+        productsCards.append(img, title, desc, price, addtocart);
+        containerel.append(productsCards);
+      });
+    }
+  </script>
+</html>

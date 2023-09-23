@@ -1,0 +1,92 @@
+/* Write your styles here  */
+
+body {
+  /* background-color: red; */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+#doctors{
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  text-align: center;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+#doctors > div{
+ 
+ 
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding-bottom: 10px;
+  
+
+}
+
+#doctors > div img{
+
+  width: 100%;
+
+}
+.button_div{
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.button_div button{
+  border: none;
+  padding: 5px 10px 5px 10px;
+  background-color: red;
+  border-radius: 15px;
+  color: aqua;
+  margin: 5px;
+}
+.button_div button:nth-child(1){
+ 
+  background-color: rgba(0, 255, 255, 0.10);
+  color: aqua;
+}
+
+.button_div button:nth-child(2){
+
+  background-color: red;
+  color: white;
+
+}
+
+#service{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px
+  ;
+  text-align: center;
+}
+
+#service >div{
+  padding: 50px;
+}
+
+/* keep media queries at the bottom */
+/* Medium screens */
+@media all and (min-width: 451px) and (max-width: 750px) {
+  #doctors{
+    grid-template-columns: repeat(2,1fr);
+  }
+  #service{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+/* Small screens */
+@media all and (min-width: 100px) and (max-width: 450px) {
+
+  #doctors{
+    grid-template-columns: repeat(1,1fr);
+  }
+  #service{
+    grid-template-columns: repeat(1,1fr);
+  }
+}

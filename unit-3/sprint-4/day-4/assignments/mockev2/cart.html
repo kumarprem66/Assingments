@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <style>
+      /* All Your css for Cart page goes here  */
+
+      #cart-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .card {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1>Web E-Commerce</h1>
+      <a href="./index.html">Home</a>
+      <a href="./cart.html">Cart</a>
+    </div>
+    <h1 id="total">
+      Your total order value is :- <span id="cart-total">0</span>
+    </h1>
+    <div id="cart-container">
+      <!-- Here Append All the Cart Cards here-->
+    </div>
+  </body>
+  <script type="module">
+
+
+  let localcart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let cartTotal = document.getElementById("cart-total");
+
+  let totaldata = [];
+
+  let sum = 0;
+
+
+
+  let cart_con = document.getElementById("cart-container");
+
+
+  async function getData(id) {
+      let res = await fetch(`https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products/1`);
+      res = await res.json();
+
+
+      let resdata = res.data;
+
+      // for(let i=0;i<localcart.length;i++){
+
+      //   let single = resdata.filter((item)=>{
+      //     return item.id == localcart[i];
+      //   })
+
+      //   totaldata.push(...single);
+
+      // }
+
+      console.log(resdata)
+      display(localcart);
+    }
+
+  window.addEventListener("load",function(){
+    getData();
+    // display(localcart);
+
+  })
+
+
+  function display(data) {
+    cart_con.innerText = "";
+
+      data.forEach((element, ind) => {
+        let card = document.createElement("div");
+        card.classList.add("card");
+
+        sum += element.price;
+        let img = document.createElement("img");
+        img.src = element.image;
+
+        let title = document.createElement("h2");
+        title.innerText = element.title;
+        let brand = document.createElement("p");
+        brand.innerText = element.brand;
+        let category = document.createElement("p");
+        category.innerText = element.category;
+
+        let price = document.createElement("p");
+        price.innerText = element.price;
+
+
+         let addtocart = document.createElement("button");
+        addtocart.addEventListener("click",function(){
+
+          // if(isAlready(data.id)){
+
+          //   alerttext.innerText = "Product already in the cart."
+          // }else{
+          //   alerttext.innerText = "Product added to The cart.";
+          //   localcart.push(data.id);
+          // localStorage.setItem("cart",JSON.stringify(localcart));
+          // }
+          
+
+
+        })
+
+        // addtocart.classList.add("addCart");
+        addtocart.innerText = "Add To Cart";
+
+        card.append(img, title, brand, category, price, addtocart);
+
+        cart_con.append(card);
+
+        // product_con.append(card_con)
+      });
+
+      cartTotal.innerText = sum;
+    }
+
+
+    
+  </script>
+</html>

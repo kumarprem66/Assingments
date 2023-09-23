@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .con {
+        padding: 10px;
+        width: 80%;
+        margin: auto;
+      }
+      .navbar {
+        height: 70px;
+        font-weight: 700;
+        font-size: 30px;
+        margin-bottom: 20px;
+        background-color: yellow;
+      }
+      .main {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 150px);
+        gap: 10px;
+      }
+      .main div {
+        /* height: 100px; */
+        background-color: green;
+      }
+      .main div:nth-child(1) {
+        grid-area: 1/1/4/4;
+        background-color: red;
+      }
+      @media screen and (min-width: 500px) and (max-width: 1000px) {
+        .main {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .main div:nth-child(1) {
+          grid-area: 1/1/3/4;
+        }
+      }
+      @media screen and (max-width: 500px) {
+        .main {
+          grid-template-columns: repeat(1, 1fr);
+          grid-template-rows: repeat(5, 150px);
+          gap: 10px;
+        }
+        .main div:nth-child(1) {
+          grid-area: 1/1/3/2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="con">
+      <div class="navbar">Navigation</div>
+      <div class="main">
+        <div>LEFT BOX</div>
+        <div>RIGHT BOX 1</div>
+        <div>RIGHT BOX 2</div>
+        <div>RIGHT BOX 3</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    header{
+        display: flex;
+        padding: 20px;
+        /* justify-content: flex-end; */
+        border: 1px solid red;
+    }
+    nav{
+        display: flex;
+        width: 70%;
+        justify-content: space-evenly;
+        /* border: 1px solid black; */
+    }
+    nav>a{
+        font-size: 20px;
+        font-weight: 700;
+        text-decoration: none;
+        color: black;
+    }
+
+    nav>a:nth-child(1){
+        color: green;
+    }
+    .main_container{
+        margin: 30px;
+        display: grid;
+        grid-template-columns: 40% 55%;
+        gap: 30px;
+    }
+
+    .main_container .left{
+        display: flex;
+        background-color: aquamarine;
+        height: 80vh;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .main_container .right{
+        display: flex;
+        background-color: aquamarine;
+        height: 80vh;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .main_container .right >form> div{
+        /* border: 1px solid red; */
+        width: 80%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        /* padding: 10px; */
+        /* height: 50px; */
+    }
+    .main_container .right >form{
+        width: 80%;
+        /* border: 1px solid red; */
+    }
+    .main_container .right >form> div>input[type=text],
+    .main_container .right >form> div>input[type=number]{
+        width: 100%;
+        padding: 10px;
+        font-size: 20px;
+
+    }
+
+    label{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 17px;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    select{
+        font-size: 20px;
+        margin: 10px;
+    }
+
+    .main_container .right >form> div:last-child{
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: flex-end;
+    }
+    input[type=submit]{
+        font-size: 16px;
+        padding: 10px 20px;
+        cursor: pointer;
+
+
+    }
+
+
+   
+</style>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Register</a>
+           <a href="dashboard.html">Dashboard</a>
+           <a href="vaccinated.html">Vaccinated</a>
+        </nav>
+    </header>
+
+    <div class="main_container">
+        <div class="left">
+            <h1>Registration Page</h1>
+        </div>
+        <div class="right">
+            <form>
+               <div>
+                <label for="">ID</label>
+                <input type="number" name="id" required>
+               </div>
+
+               <div>
+                <label for="">Name</label>
+                <input type="text" id="name" name="name" value="" required>
+               </div>
+
+                <div>
+                    <label for="">Age</label>
+                <input type="number" id="number" name="age" value="" required>
+                </div>
+
+                <label for="">Designation</label>
+                <div>
+                    <input type="radio" value="Employee" name="desig" id="emp" checked>
+                    <label for="emp">Employee</label>
+                    <input type="radio" value="Student" name="desig" id="stu" >
+                    <label for="stu">Student</label>
+                </div>
+               
+
+                <label for="">Priority</label>
+               <div>
+                <input type="radio" value="p0" name="priority" checked>
+                <label for="">P0</label>
+                <input type="radio" value="p1" name="priority">
+                <label for="">P1</label>
+                <input type="radio" value="p2" name="priority">
+                <label for="">P2</label>
+                <input type="radio" value="p3" name="priority">
+                <label for="">P3</label>
+               </div>
+
+                <div>
+                    <select name="vaccine" id="">
+                        <option value="Covishield">Covishield</option>
+                        <option value="Covaxin">Covaxin</option>
+                        <option value="Sputnik">Sputnik</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="submit" name="submit" value="submit" id="submitbtn">
+                </div>
+                
+
+            </form>
+            <pre id="log"></pre>
+        </div>
+    </div>
+
+</body>
+<script>
+    let form = document.querySelector("form");
+    let log = document.querySelector("#log");
+    let temp = 0;
+
+    let userdata =  JSON.parse(localStorage.getItem("registerdata")) || [];
+
+    form.addEventListener("submit",function(event){
+        event.preventDefault();
+
+        const data = new FormData(form);
+
+        let obj = {};
+        for(const entry of data){
+
+            obj[entry[0]]= entry[1];
+            temp =1
+        }
+        let otp = "";
+        for(let i=0;i<4;i++){
+            otp += Math.floor(Math.random()*10);
+        }
+
+        obj.otp = otp;
+        if(temp==1){
+          
+            // document.getElementById("submitbtn").setAttribute("disabled","true");
+
+            console.log(obj)
+
+            userdata.push(obj);
+            localStorage.setItem("registerdata",JSON.stringify(userdata));
+        }
+       
+  
+    },
+    false
+    );
+
+   
+</script>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #ecf0f3;
+      font-family: sans-serif;
+      outline: none;
+    }
+    .outer {
+      display: flex;
+      height: 95vh;
+      justify-content: center;
+      align-items: center;
+      /* background-color: aqua; */
+    }
+    .inner {
+      background-color: #ecf0f3;
+      padding: 14px;
+      border-radius: 30px;
+      box-shadow: inset 5px 5px 12px #ffffff, 5px 5px 12px rgba(0, 0, 0, 0.16);
+      display: grid;
+      grid-template-columns: repeat(4, 68px);
+    }
+    input {
+      grid-column: span 4;
+      height: 70px;
+      width: 260px;
+      background-color: #ecf0f3;
+      border: none;
+      border-radius: 30px;
+      color: rgb(70, 70, 70);
+      font-size: 50px;
+      text-align: end;
+      padding: 20px;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      box-shadow: inset -5px -5px 12px #ffffff,
+        inset 5px 5px 12px rgba(0, 0, 0, 0.16);
+    }
+
+    button {
+      height: 48px;
+      width: 48px;
+      background-color: #ecf0f3;
+      box-shadow: inset 5px 5px 12px #ffffff,
+        inset -5px -5px 12px rgba(0, 0, 0, 0.16);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .black {
+      background-color: black;
+      color: white;
+    }
+    .red {
+      background-color: red;
+      color: white;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+  <body>
+    <h1>MASAI CALCULATOR</h1>
+    <div class="outer">
+      <div class="inner">
+        <input type="text" placeholder="0" id="display" />
+        <button class="number">1</button>
+        <button class="number">2</button>
+        <button class="number">3</button>
+        <button class="black">+</button>
+        <button class="number">4</button>
+        <button class="number">5</button>
+        <button class="number">6</button>
+        <button class="black">-</button>
+        <button class="number">7</button>
+        <button class="number">8</button>
+        <button class="number">9</button>
+        <button class="black">*</button>
+        <button class="red">C</button>
+        <button class="number">0</button>
+        <button id="equal">=</button>
+        <button class="black">/</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    let numberButton = document.querySelectorAll(".number");
+    let showtext = document.getElementById("display");
+
+    let operatorButton = document.querySelectorAll(".black");
+    let equalBtn = document.getElementById("equal");
+
+    let empty = document.querySelector(".red");
+
+    let isFirstNumber = true;
+    let firstNumber = "";
+    let secondNumber = "";
+    let operator = null;
+    for (let i = 0; i < numberButton.length; i++) {
+      numberButton[i].addEventListener("click", function (event) {
+        if (isFirstNumber === true) {
+          firstNumber += event.target.innerText;
+        } else {
+          secondNumber += event.target.innerText;
+        }
+        showtext.value = showtext.value + event.target.innerText;
+      });
+    }
+    for (let i = 0; i < operatorButton.length; i++) {
+      operatorButton[i].addEventListener("click", function (event) {
+        isFirstNumber = false;
+        operator = event.target.innerText;
+        showtext.value = showtext.value + event.target.innerText;
+      });
+    }
+
+    // function calculator(firstnum, secondnum, sign) {
+    //   switch (operator) {
+    //     case "+":
+    //       return Number(firstNumber) + Number(secondNumber);
+    //     case "-":
+    //       return Number(firstNumber) - Number(secondNumber);
+    //     case "*":
+    //       return Number(firstNumber) * Number(secondNumber);
+    //     case "/":
+    //       return Number(firstNumber) / Number(secondNumber);
+    //   }
+    // }
+
+    equalBtn.addEventListener("click", function () {
+      // showtext.value = calculator(firstNumber, secondNumber, operator);
+      // alert("hello == ");
+      showtext.value = eval(showtext.value);
+    });
+
+    empty.addEventListener("click", function () {
+      showtext.value = "";
+    });
+  </script>
+</html>

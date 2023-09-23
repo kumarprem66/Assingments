@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      /* All Your css here  */
+
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+
+      .nav a {
+        background-color: deeppink;
+        padding: 10px 15px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 10px;
+      }
+
+      #sort {
+        font-size: 30px;
+        display: block;
+        /* text-align: center; */
+        margin: auto;
+      }
+
+      form {
+        display: flex;
+        margin-top: 30px;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        align-items: center;
+      }
+
+      #search {
+        width: 60%;
+        font-size: 25px;
+        padding: 5px;
+        margin-right: 5px;
+      }
+      input[type="submit"] {
+        background-color: #009879;
+
+        width: 100px;
+        height: 45px;
+        /* padding: 5px; */
+        color: white;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .table_content {
+        border-collapse: collapse;
+        width: 90%;
+        text-align: center;
+        padding: 10px;
+        margin: auto;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        font-size: 0.9em;
+      }
+
+      .table_content thead tr {
+        background-color: #009879;
+        padding: 10px;
+        font-weight: bold;
+      }
+
+      .table_content th {
+        color: white;
+        padding: 12px 15px;
+      }
+
+      .table_content td {
+        padding: 12px 15px;
+      }
+
+      .table_content td:last-child {
+        background-color: deeppink;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .table_content tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .table_content tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      .table_content tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <h1>Masai Country Records</h1>
+      <a href="./index.html">Home</a>
+      <a href="./visited.html">Visited</a>
+    </div>
+    <select id="sort">
+      <option value="">Sort By Population</option>
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+    <form>
+      <input type="text" placeholder="Search" id="search" />
+      <input type="submit" value="Search" />
+    </form>
+    <table class="table_content">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Country</th>
+          <th>Rank</th>
+          <th>Population</th>
+          <th>Visited</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Here all rows will be appended  -->
+      </tbody>
+    </table>
+  </body>
+  <script>
+    // Write all JS here
+
+    let url = `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries`;
+
+    let visitedarr = JSON.parse(localStorage.getItem("visited")) || [];
+
+    let parent = document.querySelector("tbody");
+    let formele = document.querySelector("form");
+    let sortele = document.getElementById("sort");
+    let arr = [];
+
+    fetchData(url);
+
+    async function fetchData(url) {
+      try {
+        let countrydata = await fetch(url);
+        countrydata = await countrydata.json();
+
+        arr = countrydata.data;
+        displaydata(arr);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+   
+    function displaydata(data) {
+      parent.innerHTML = "";
+      data.forEach((element) => {
+        let tr = document.createElement("tr");
+
+        let id = document.createElement("td");
+        id.textContent = element.id;
+        let country = document.createElement("td");
+        country.textContent = element.country;
+        let rank = document.createElement("td");
+        rank.textContent = element.Rank;
+        let population = document.createElement("td");
+        population.textContent = element.population;
+
+        let visited = document.createElement("td");
+        visited.textContent = "Visit";
+
+        visited.addEventListener("click", () => {
+          visitedarr.push(element);
+          localStorage.setItem("visited", JSON.stringify(visitedarr));
+        });
+
+        tr.append(id, country, rank, population, visited);
+        parent.append(tr);
+      });
+    }
+
+    formele.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let inputtext = document.getElementById("search").value;
+      console.log(inputtext);
+
+      let filtered = arr.filter((element) => {
+        if (element.country.toLowerCase().includes(inputtext.toLowerCase())) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      displaydata(filtered);
+    });
+
+    sortele.addEventListener("change", () => {
+      if (sortele.value == "asc") {
+        url =
+          "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries?sort=population&&order=asc";
+      } else if (sortele.value == "desc") {
+        url =
+          "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries?sort=population&&order=desc";
+      } else {
+        url =
+          "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-countries";
+      }
+
+      fetchData(url);
+    });
+  </script>
+</html>

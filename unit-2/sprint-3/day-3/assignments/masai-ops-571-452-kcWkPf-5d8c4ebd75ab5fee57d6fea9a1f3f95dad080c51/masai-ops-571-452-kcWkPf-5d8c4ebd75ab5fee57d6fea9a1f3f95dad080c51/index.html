@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up Page</title>
+    <style>
+      /* Write all necessery css here  */
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <a href="./index.html">Signup</a>
+      <a href="./signin.html">Signin</a>
+    </div>
+    <div id="signup">
+      <h1>Please Enter Your Details</h1>
+      <form>
+        <input type="text" id="name" />
+        <input type="email" id="email" />
+        <input type="password" id="password" />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+  <script>
+    let formele = document.querySelector("form");
+    formele.addEventListener("submit", function (e) {
+      e.preventDefault();
+      let obj = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      };
+
+      let arr = JSON.parse(localStorage.getItem("account-data")) || [];
+      arr.push(obj);
+      localStorage.setItem("account-data", JSON.stringify(arr));
+      alert("Your account has been created");
+    });
+  </script>
+</html>

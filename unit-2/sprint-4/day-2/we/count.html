@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="inp" />
+    <button>Apply</button>
+  </body>
+  <script>
+    let buttonEl = document.querySelector("button");
+    let inpEl = document.querySelector("input");
+
+    buttonEl.addEventListener("click", function () {
+      let num = Number(inpEl.value);
+
+      let promise = new Promise(function (resolve, reject) {
+        if (num >= 0) {
+          resolve("Positive");
+        } else {
+          reject("Negative");
+        }
+      });
+
+      promise
+        .then((element) => {
+          alert(element);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    });
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .navbar {
+        height: 70px;
+        background-color: aqua;
+      }
+      .main {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        /* grid-template-rows: repeat(1, 200px); */
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .main div {
+        background-color: blueviolet;
+        height: 200px;
+      }
+      @media screen and (min-width: 501px) and (max-width: 1000px) {
+        .main {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        .main {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="con">
+      <div class="navbar"></div>
+      <div class="main">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #ecf0f3;
+      font-family: sans-serif;
+      outline: none;
+    }
+    .outer {
+      display: flex;
+      height: 95vh;
+      justify-content: center;
+      align-items: center;
+      /* background-color: aqua; */
+    }
+    .inner {
+      background-color: #ecf0f3;
+      padding: 14px;
+      border-radius: 30px;
+      box-shadow: inset 5px 5px 12px #ffffff, 5px 5px 12px rgba(0, 0, 0, 0.16);
+      display: grid;
+      grid-template-columns: repeat(4, 68px);
+    }
+    input {
+      grid-column: span 4;
+      height: 70px;
+      width: 260px;
+      background-color: #ecf0f3;
+      border: none;
+      border-radius: 30px;
+      color: rgb(70, 70, 70);
+      font-size: 50px;
+      text-align: end;
+      padding: 20px;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      box-shadow: inset -5px -5px 12px #ffffff,
+        inset 5px 5px 12px rgba(0, 0, 0, 0.16);
+    }
+
+    button {
+      height: 48px;
+      width: 48px;
+      background-color: #ecf0f3;
+      box-shadow: inset 5px 5px 12px #ffffff,
+        inset -5px -5px 12px rgba(0, 0, 0, 0.16);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .black {
+      background-color: black;
+      color: white;
+    }
+    .red {
+      background-color: red;
+      color: white;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+  <body>
+    <h1>MASAI CALCULATOR</h1>
+    <div class="outer">
+      <div class="inner">
+        <input type="text" placeholder="0" />
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="black">+</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="black">-</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="black">x</button>
+        <button class="red">C</button>
+        <button>0</button>
+        <button class="black">=</button>
+        <button class="black">/</button>
+      </div>
+    </div>
+  </body>
+</html>

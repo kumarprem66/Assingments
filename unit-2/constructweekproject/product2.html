@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .offer_pop {
+      background-color: black;
+    }
+    .offer_pop > p {
+      color: white;
+      text-align: center;
+      padding: 7px;
+    }
+
+    .up_nav {
+      display: grid;
+      grid-template-columns: 8% 12% 55% 25%;
+      align-items: center;
+
+      padding-right: 20px;
+      height: 80px;
+    }
+    .up_nav > div:nth-child(1) {
+      text-align: center;
+      /* position: fixed; */
+    }
+
+    .up_nav > div:nth-child(2) {
+      padding: 20px;
+    }
+    .up_nav > div:nth-child(2) > img {
+      width: 100%;
+    }
+
+    .up_nav > div:nth-child(3) {
+      background-color: rgb(183, 190, 197);
+      border-radius: 30px;
+      margin-right: 40px;
+      height: 70%;
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .up_nav > div:nth-child(3) > input {
+      width: 90%;
+      height: 100%;
+      font-size: 18px;
+      text-decoration: none;
+      background-color: rgb(183, 190, 197);
+      border: none;
+      padding: 10px;
+    }
+
+    .up_nav > div:nth-child(4) {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .nav {
+      display: flex;
+      padding: 10px;
+      margin-right: 10px;
+    }
+    .nav > h3 {
+      margin-right: 20px;
+      font-size: 17px;
+    }
+
+    #main_cont {
+      padding-left: 7%;
+      padding-right: 20px;
+    }
+    .sorting {
+      display: flex;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .sorting > select {
+      font-size: 25px;
+    }
+
+    .product_con {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .product_con > div {
+      border: 0.5px solid darkgray;
+    }
+    .product_con > div > img {
+      width: 100%;
+    }
+    .product_con > div > div {
+      padding-top: 30px;
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bottom {
+      display: grid;
+      grid-template-columns: 20% 15% 15% 15% 15%;
+      gap: 40px;
+      margin-bottom: 50px;
+      background-color: darkgrey;
+      padding: 50px 20px;
+    }
+
+    .bottom p {
+      line-height: 2;
+    }
+  </style>
+  <body>
+    <div class="offer_pop">
+      <p><i>Get 20% off* on delivery charges-limited period offer!</i></p>
+    </div>
+    <div class="up_nav">
+      <div>
+        <span class="material-icons"> menu </span>
+        <h3>Menu</h3>
+      </div>
+
+      <div>
+        <img src="./images/ikealogo.png" alt="" />
+      </div>
+
+      <div>
+        <span class="material-icons"> photo_camera </span>
+        <input type="text" placeholder="what are you looking for?" />
+        <span class="material-icons"> search </span>
+      </div>
+
+      <div>
+        <div>
+          <span class="material-icons"> person </span>
+          <h3>Hey! Log in or sign up</h3>
+        </div>
+        <i>van</i>
+        <i>cart</i>
+      </div>
+    </div>
+
+    <div id="main_cont">
+      <div class="nav">
+        <h3>Products</h3>
+        <h3>Rooms</h3>
+        <h3>New at BLUE-WOOD</h3>
+        <h3>offers</h3>
+      </div>
+
+      <div class="sorting">
+        <select name="sort" id="sort">
+          <option value="">Sort</option>
+          <option value="bm">Best match</option>
+          <option value="new">Newest</option>
+          <option value="cr">customer Rating</option>
+          <option value="Name">Name</option>
+          <option value="Most popular">Mp</option>
+          <option value="width">width</option>
+          <option value="height">height</option>
+          <option value="depth">depth</option>
+        </select>
+
+        <select id="category" name="category">
+          <option value="">Categoty</option>
+          <option value="wall shelves">Wall shelves</option>
+          <option value="hooks">Hooks</option>
+          <option value="wall storage">Wall Storage</option>
+        </select>
+
+        <select id="price" name="price">
+          <option value="price">Price</option>
+          <option value="first">₹0 - 199</option>
+          <option value="second">₹200 - 399</option>
+          <option value="third">₹400 - 599</option>
+          <option value="four">₹600 - 799</option>
+          <option value="fifth">₹800+</option>
+        </select>
+      </div>
+
+      <div class="product_con">
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+
+        <div>
+          <img
+            src="https://www.ikea.com/in/en/images/products/sibbhult-bracket-white__0833966_pe778131_s5.jpg?f=xxxs"
+            alt=""
+          />
+          <div>
+            <h2>SIBBHULT</h2>
+            <p>Bracket,18x18 cm (7x7")</p>
+            <p><span>Rs</span>70</p>
+            <div>******</div>
+            <i>🤍</i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div>
+          <div>
+            <h4>Join IKEA Family</h4>
+            <p>
+              Enjoy guaranteed discounts, special previews, food offers and much
+              more. Sign up today - it’s free and only takes a minute to join.
+            </p>
+
+            <button>Join the club</button>
+          </div>
+          <div>
+            <h4>IKEA for Business</h4>
+            <p>
+              Our business & design experts help you with flexible,affordable
+              and sustainabe solutions. Create a better life at work with us
+            </p>
+            <button>Join now</button>
+          </div>
+        </div>
+
+        <div>
+          <h4>BLUE-WOOD Family</h4>
+          <p>Log in</p>
+          <p>Join BLUE-WOOD Family</p>
+          <p>Members offers</p>
+          <p>Workshops & Events</p>
+        </div>
+
+        <div>
+          <h4>Services</h4>
+          <p>Design your room</p>
+          <p>Delivery Service</p>
+          <p>Installation Service</p>
+          <p>Assembly Service</p>
+          <p>Kitchen Planning</p>
+          <p>Measuring Servies</p>
+          <p>Customer Services</p>
+          <p>Recylcle Program</p>
+          <p>Track Your Order</p>
+          <p>Click & collect</p>
+        </div>
+
+        <div>
+          <h4>Help</h4>
+          <p>How to shop</p>
+          <p>Return policy</p>
+          <p>Prices and price tags</p>
+          <p>Contact us</p>
+          <p>FAQ's</p>
+          <p>Planners</p>
+          <p>Size guide- Beds & mattresses</p>
+          <p>Buying guides</p>
+          <p>Gift Card</p>
+          <p>Feedback</p>
+        </div>
+        <div>
+          <h4>About BLUE-WOOD</h4>
+          <p>This is BLUE-WOOD</p>
+          <p>Working at WOOD</p>
+          <p>Newsroom</p>
+          <p>Sustainabily</p>
+          <p>IKEA Stores</p>
+          <p>IKEA Restaurant</p>
+          <p>IKEA for Business</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

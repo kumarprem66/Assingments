@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/skeleton.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>Masai Todo App</h1>
+          <hr>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="columns four sidebar-one" id="sidebar-one">
+
+          <!-- <h4>Register User</h4>
+          <input type="text" id="register-user-username" class="u-full-width" placeholder="username" />
+          <input type="text" id="register-user-firstname" class="u-full-width" placeholder="firstname" />
+          <input type="text" id="register-user-lastname" class="u-full-width" placeholder="lastname" />
+          <input type="text" id="register-user-email" class="u-full-width" placeholder="email" />
+          <input type="password" id="register-user-password" class="u-full-width" placeholder="password" />
+          <input type="text" id="register-user-avatar" class="u-full-width" placeholder="avatar image url" value="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/762.jpg"/>
+          <input type="number" id="register-user-level" class="u-full-width" placeholder="level" />
+          <button id="register-user" class="u-full-width button button-primary">Register User</button>
+          <hr> -->
+
+          <h4>Log in an existing User</h4>
+          <input type="text" id="login-user-username" class="u-full-width" placeholder="username" />
+          <input type="password" id="login-user-password" class="u-full-width" placeholder="password" />
+          <button id="login-user" class="u-full-width button button-primary">Login User</button>
+          <hr>
+
+          <!-- <h4>Patch User Email</h4>
+          <input type="email" id="patch-user-email" class="u-full-width" placeholder="New email id" />
+          <button id="patch-user" class="u-full-width button button-primary">Update User's Email</button>
+          <hr> -->
+
+          <button id="fetch-todos" class="u-full-width button button-primary">fetch todos</button>
+          <hr>
+
+          <h4>Sort Todos alphabetically by their title</h4>
+          <button
+            id="sort-low-to-high"
+            class="u-full-width button button-primary"
+          >
+            Sort (A to Z)
+          </button>
+          <button
+            id="sort-high-to-low"
+            class="u-full-width button button-primary"
+          >
+          Sort (Z to A)
+          </button>
+          <hr />
+
+          <h4>Filter Todos Based Status</h4>
+          <button
+            id="filter-completed"
+            class="u-full-width button button-primary"
+          >
+            Completed
+          </button>
+          <button
+            id="filter-pending"
+            class="u-full-width button button-primary"
+          >
+            Pending
+          </button>
+          <hr />
+
+
+        </div>
+
+        <div class="columns eight main">
+          <div class="notifications-wrapper" id="notifications-wrapper"></div>
+          <div class="data-list-wrapper" id="data-list-wrapper"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <label class="todo-item-label">
+      <input class="todo-item-checkbox" data-id="${dataid}" type="checkbox" checked >
+    </label> -->
+
+    <script src="./scripts/main.js" type="module"></script>
+  </body>
+</html>

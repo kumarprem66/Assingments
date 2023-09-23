@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Doctor Records</title>
+  </head>
+  <body>
+    <!-- Use this form for data input  -->
+    <form>
+      <input placeholder="Name" type="text" id="name" />
+      <input placeholder="Doctor ID" type="text" id="doctor_id" />
+      <select id="specialization">
+        <option value="">Select Specialization</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Dentist">Dentist</option>
+        <option value="Gynecologist">Gynecologist</option>
+      </select>
+      <input placeholder="Experience" type="number" id="experience" />
+      <input placeholder="Email" type="email" id="email" />
+      <input placeholder="Mobile No." type="number" id="mobile" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Use this Select tag for filter part  -->
+    <select id="filter">
+      <option value="">Select Specialization</option>
+      <option value="Dermatologist">Dermatologist</option>
+      <option value="Dentist">Dentist</option>
+      <option value="Gynecologist">Gynecologist</option>
+    </select>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Doctor ID</th>
+          <th>Specialization</th>
+          <th>Experience in Years</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Role</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append Rows here using JS & DOM  -->
+      </tbody>
+    </table>
+  </body>
+
+  <script>
+    let formele = document.querySelector("form");
+    let tbodyele = document.querySelector("tbody");
+    let name = document.getElementById("name");
+    let doctor_id = document.getElementById("doctor_id");
+    let specialization = document.getElementById("specialization");
+    let experience = document.getElementById("experience");
+    let email = document.getElementById("email");
+    let mobile = document.getElementById("mobile");
+
+    let filterele = document.getElementById("filter");
+    let options = document.querySelectorAll("option");
+
+    let arr = [];
+
+    formele.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let tableData = {
+        name: name.value,
+        doc_id: doctor_id.value,
+        spec: specialization.value,
+        exp: experience.value,
+        email: email.value,
+        mobile: mobile.value,
+      };
+
+      arr.push(tableData);
+
+      appendata(arr);
+    });
+
+    filterele.addEventListener("change", filterfunction);
+
+    function filterfunction() {
+      let filtervalue = filterele.value;
+      let arr2 = arr.filter(function (ele, ind) {
+        if (filtervalue === "") {
+          return true;
+        }
+        return ele.spec === filtervalue;
+      });
+
+      appendata(arr2);
+    }
+
+    function appendata(arr) {
+      tbodyele.innerText = "";
+      for (let i = 0; i < arr.length; i++) {
+        let row = document.createElement("tr");
+
+        let col1 = document.createElement("td");
+        col1.innerText = arr[i].name;
+
+        let col2 = document.createElement("td");
+        col2.innerText = arr[i].doc_id;
+
+        let col3 = document.createElement("td");
+        col3.innerText = arr[i].spec;
+
+        let col4 = document.createElement("td");
+        col4.innerText = arr[i].exp;
+
+        let col5 = document.createElement("td");
+        col5.innerText = arr[i].email;
+
+        let col6 = document.createElement("td");
+        col6.innerText = arr[i].mobile;
+
+        let col7 = document.createElement("td");
+        let role = "";
+        if (arr[i].exp <= 1) {
+          role = "Trainee";
+        } else if (arr[i].exp >= 2 && arr[i].exp <= 5) {
+          role = "Junior";
+        } else {
+          role = "Senior";
+        }
+
+        col7.innerText = role;
+
+        let col8 = document.createElement("td");
+        col8.innerText = "Delete";
+
+        col8.addEventListener("click", function (e) {
+          arr.splice(i, 1);
+          appendata(arr);
+          // console.log(arr);
+        });
+
+        row.append(col1, col2, col3, col4, col5, col6, col7, col8);
+        tbodyele.append(row);
+      }
+    }
+  </script>
+</html>

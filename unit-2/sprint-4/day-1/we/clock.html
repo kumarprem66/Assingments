@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>
+      <span id="hour">00</span>
+      <span>:</span>
+      <span id="min">00</span>
+      <span>:</span>
+      <span id="sec">00</span>
+    </h1>
+  </body>
+
+  <script>
+    let hourel = document.getElementById("hour");
+    let minel = document.getElementById("min");
+    let secel = document.getElementById("sec");
+
+    let sec = 0;
+    let min = 0;
+    let hour = 0;
+
+    setInterval(function () {
+      if (min === 59) {
+        hour++;
+        hourel.innerText = hour;
+        min = 0;
+      }
+      if (sec === 10) {
+        min++;
+        minel.innerText = min;
+        sec = 0;
+      }
+      sec++;
+      secel.innerText = sec;
+    }, 1000);
+  </script>
+</html>
